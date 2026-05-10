@@ -1,1 +1,1707 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curaçao 2026 — Chitsaz Family Trip Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f4ecdc;
+    --sand-2: #ede1c8;
+    --sand-3: #e1d2b1;
+    --ink: #0d1f2d;
+    --ink-2: #1c3447;
+    --sea: #0a6e8a;
+    --sea-deep: #034254;
+    --turquoise: #2bb6c4;
+    --coral: #e85a3c;
+    --coral-2: #c93f23;
+    --sun: #f4b942;
+    --green: #2e8b57;
+    --line: rgba(13,31,45,0.12);
+    --line-strong: rgba(13,31,45,0.22);
+    --shadow-sm: 0 1px 2px rgba(13,31,45,0.06), 0 1px 3px rgba(13,31,45,0.08);
+    --shadow-md: 0 4px 12px rgba(13,31,45,0.08), 0 2px 4px rgba(13,31,45,0.06);
+    --shadow-lg: 0 10px 40px rgba(13,31,45,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', system-ui, sans-serif;
+    background: var(--sand);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(43,182,196,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(232,90,60,0.06) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+/* ───── Header / Hero ───── */
+header.hero {
+position: relative;
+background: linear-gradient(135deg, var(–sea-deep) 0%, var(–sea) 50%, var(–turquoise) 100%);
+color: var(–sand);
+padding: 36px 24px 28px;
+overflow: hidden;
+border-bottom: 4px solid var(–ink);
+}
+header.hero::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background-image:
+repeating-linear-gradient(
+45deg,
+transparent 0,
+transparent 20px,
+rgba(255,255,255,0.03) 20px,
+rgba(255,255,255,0.03) 21px
+);
+pointer-events: none;
+}
+.hero-grid {
+max-width: 1400px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1fr auto;
+gap: 24px;
+align-items: end;
+position: relative;
+}
+.eyebrow {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+opacity: 0.75;
+margin-bottom: 8px;
+}
+h1.title {
+font-family: ‘Fraunces’, serif;
+font-weight: 300;
+font-size: clamp(36px, 6vw, 68px);
+line-height: 0.95;
+letter-spacing: -0.02em;
+margin-bottom: 10px;
+}
+h1.title em {
+font-style: italic;
+font-weight: 400;
+color: var(–sun);
+}
+.meta-row {
+display: flex;
+flex-wrap: wrap;
+gap: 18px 28px;
+font-size: 13px;
+opacity: 0.92;
+font-family: ‘JetBrains Mono’, monospace;
+}
+.meta-row span strong { color: var(–sun); margin-right: 6px; }
+.countdown {
+text-align: right;
+font-family: ‘Fraunces’, serif;
+line-height: 1;
+}
+.countdown .num {
+font-size: 64px;
+font-weight: 300;
+color: var(–sun);
+display: block;
+}
+.countdown .label {
+font-size: 11px;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+font-family: ‘JetBrains Mono’, monospace;
+opacity: 0.8;
+}
+
+/* ───── Tabs ───── */
+nav.tabs {
+background: var(–ink);
+color: var(–sand);
+padding: 0;
+position: sticky;
+top: 0;
+z-index: 100;
+box-shadow: var(–shadow-md);
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+}
+.tabs-inner {
+max-width: 1400px;
+margin: 0 auto;
+display: flex;
+gap: 0;
+min-width: max-content;
+}
+.tab {
+background: none;
+border: none;
+color: var(–sand);
+padding: 16px 22px;
+font-family: ‘Manrope’, sans-serif;
+font-size: 13px;
+font-weight: 600;
+letter-spacing: 0.05em;
+text-transform: uppercase;
+cursor: pointer;
+transition: all 0.2s;
+border-bottom: 3px solid transparent;
+white-space: nowrap;
+opacity: 0.65;
+}
+.tab:hover { opacity: 1; background: rgba(255,255,255,0.05); }
+.tab.active { opacity: 1; border-bottom-color: var(–sun); color: var(–sun); }
+.tab .count {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+margin-left: 6px;
+opacity: 0.6;
+}
+
+/* ───── Main ───── */
+main {
+max-width: 1400px;
+margin: 0 auto;
+padding: 32px 24px 80px;
+position: relative;
+z-index: 1;
+}
+.section { display: none; animation: fadeIn 0.3s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+h2.section-title {
+font-family: ‘Fraunces’, serif;
+font-weight: 300;
+font-size: clamp(28px, 4vw, 44px);
+line-height: 1;
+letter-spacing: -0.01em;
+margin-bottom: 8px;
+}
+h2.section-title em { font-style: italic; color: var(–coral); }
+.section-sub {
+font-size: 14px;
+opacity: 0.7;
+margin-bottom: 28px;
+max-width: 700px;
+}
+
+/* ───── Filter bar ───── */
+.filter-bar {
+display: flex;
+flex-wrap: wrap;
+gap: 8px;
+margin-bottom: 24px;
+padding-bottom: 20px;
+border-bottom: 1px solid var(–line);
+}
+.filter-bar input[type=“search”] {
+flex: 1;
+min-width: 200px;
+padding: 10px 14px;
+border: 1px solid var(–line-strong);
+border-radius: 8px;
+font-family: ‘Manrope’, sans-serif;
+font-size: 14px;
+background: white;
+color: var(–ink);
+}
+.filter-bar input[type=“search”]:focus { outline: 2px solid var(–turquoise); outline-offset: 1px; }
+.chip {
+display: inline-flex;
+align-items: center;
+padding: 8px 14px;
+border-radius: 999px;
+background: white;
+border: 1px solid var(–line-strong);
+font-size: 12px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.15s;
+color: var(–ink);
+font-family: ‘Manrope’, sans-serif;
+}
+.chip:hover { border-color: var(–ink); }
+.chip.active { background: var(–ink); color: var(–sand); border-color: var(–ink); }
+
+/* ───── Cards grid ───── */
+.grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+gap: 18px;
+}
+.card {
+background: white;
+border: 1px solid var(–line);
+border-radius: 14px;
+padding: 22px;
+transition: all 0.2s;
+position: relative;
+display: flex;
+flex-direction: column;
+box-shadow: var(–shadow-sm);
+}
+.card:hover { box-shadow: var(–shadow-md); transform: translateY(-2px); border-color: var(–line-strong); }
+.card-header {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+gap: 12px;
+margin-bottom: 8px;
+}
+.card h3 {
+font-family: ‘Fraunces’, serif;
+font-size: 22px;
+font-weight: 500;
+line-height: 1.15;
+letter-spacing: -0.01em;
+}
+.card .region {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(–sea);
+margin-bottom: 12px;
+display: inline-block;
+padding: 3px 8px;
+background: rgba(10,110,138,0.08);
+border-radius: 4px;
+}
+.card p.desc {
+font-size: 14px;
+color: var(–ink-2);
+margin-bottom: 14px;
+flex: 1;
+}
+.card .tags {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+margin-bottom: 12px;
+}
+.tag {
+font-size: 10.5px;
+padding: 3px 8px;
+background: var(–sand-2);
+border-radius: 4px;
+font-weight: 600;
+letter-spacing: 0.02em;
+color: var(–ink-2);
+font-family: ‘Manrope’, sans-serif;
+}
+.tag.kid { background: #d4f0d4; color: #1f5f1f; }
+.tag.snorkel { background: #cfeaf3; color: #034254; }
+.tag.swim { background: #fde4d4; color: #8b3318; }
+.tag.food { background: #fae5d6; color: #7c3a13; }
+.card .info-row {
+display: flex;
+flex-wrap: wrap;
+gap: 14px;
+font-size: 12px;
+color: var(–ink-2);
+padding-top: 12px;
+border-top: 1px dashed var(–line);
+font-family: ‘JetBrains Mono’, monospace;
+}
+.card .info-row span { display: flex; align-items: center; gap: 4px; }
+
+.card-actions {
+display: flex;
+gap: 8px;
+margin-top: 14px;
+padding-top: 12px;
+border-top: 1px solid var(–line);
+}
+.btn {
+border: 1px solid var(–line-strong);
+background: white;
+padding: 8px 14px;
+border-radius: 7px;
+font-size: 12px;
+font-weight: 600;
+cursor: pointer;
+color: var(–ink);
+font-family: ‘Manrope’, sans-serif;
+transition: all 0.15s;
+text-decoration: none;
+display: inline-flex;
+align-items: center;
+gap: 6px;
+}
+.btn:hover { background: var(–ink); color: var(–sand); border-color: var(–ink); }
+.btn-primary { background: var(–coral); color: white; border-color: var(–coral); }
+.btn-primary:hover { background: var(–coral-2); border-color: var(–coral-2); }
+.btn.added { background: var(–green); color: white; border-color: var(–green); }
+
+/* ───── Weather panel ───── */
+.weather-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+gap: 12px;
+margin-bottom: 28px;
+}
+.wcard {
+background: white;
+border: 1px solid var(–line);
+border-radius: 12px;
+padding: 18px 16px;
+text-align: center;
+box-shadow: var(–shadow-sm);
+position: relative;
+transition: all 0.2s;
+}
+.wcard:hover { transform: translateY(-2px); box-shadow: var(–shadow-md); }
+.wcard .day {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+text-transform: uppercase;
+letter-spacing: 0.15em;
+color: var(–sea);
+margin-bottom: 4px;
+}
+.wcard .date {
+font-family: ‘Fraunces’, serif;
+font-size: 28px;
+font-weight: 300;
+line-height: 1;
+margin-bottom: 10px;
+}
+.wcard .icon { font-size: 32px; margin-bottom: 6px; }
+.wcard .temp {
+font-family: ‘Fraunces’, serif;
+font-size: 22px;
+font-weight: 500;
+}
+.wcard .temp small { font-size: 14px; opacity: 0.6; font-weight: 300; }
+.wcard .precip {
+font-size: 11px;
+color: var(–sea);
+font-family: ‘JetBrains Mono’, monospace;
+margin-top: 6px;
+}
+.wcard .wind {
+font-size: 10px;
+color: var(–ink-2);
+opacity: 0.7;
+font-family: ‘JetBrains Mono’, monospace;
+margin-top: 2px;
+}
+.wcard.travel { background: linear-gradient(135deg, var(–sea-deep), var(–sea)); color: var(–sand); border-color: var(–sea-deep); }
+.wcard.travel .day, .wcard.travel .precip, .wcard.travel .wind { color: rgba(244,236,220,0.85); }
+.wcard.travel .icon { font-size: 26px; }
+
+.weather-status {
+background: white;
+border: 1px solid var(–line);
+border-radius: 12px;
+padding: 14px 18px;
+margin-bottom: 20px;
+font-size: 13px;
+font-family: ‘JetBrains Mono’, monospace;
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.weather-status .dot {
+width: 8px; height: 8px;
+border-radius: 50%;
+background: var(–sun);
+animation: pulse 1.5s infinite;
+}
+.weather-status.live .dot { background: var(–green); }
+.weather-status.error .dot { background: var(–coral); animation: none; }
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.4; }
+}
+
+/* ───── Itinerary ───── */
+.itinerary-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 16px;
+}
+.day-col {
+background: white;
+border: 1px solid var(–line);
+border-radius: 12px;
+padding: 18px;
+min-height: 200px;
+box-shadow: var(–shadow-sm);
+}
+.day-col h4 {
+font-family: ‘Fraunces’, serif;
+font-size: 22px;
+font-weight: 500;
+margin-bottom: 4px;
+}
+.day-col .date-line {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+color: var(–sea);
+text-transform: uppercase;
+letter-spacing: 0.1em;
+margin-bottom: 12px;
+padding-bottom: 10px;
+border-bottom: 1px dashed var(–line);
+}
+.day-col .empty {
+text-align: center;
+padding: 30px 10px;
+color: var(–ink-2);
+opacity: 0.5;
+font-size: 13px;
+font-style: italic;
+}
+.itin-item {
+background: var(–sand);
+border: 1px solid var(–line);
+border-radius: 8px;
+padding: 10px 12px;
+margin-bottom: 8px;
+font-size: 13px;
+position: relative;
+}
+.itin-item .type {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 9px;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(–sea);
+margin-bottom: 2px;
+}
+.itin-item .name { font-weight: 600; }
+.itin-item .remove {
+position: absolute;
+top: 6px;
+right: 8px;
+background: none;
+border: none;
+color: var(–coral);
+cursor: pointer;
+font-size: 16px;
+line-height: 1;
+padding: 2px 6px;
+border-radius: 4px;
+}
+.itin-item .remove:hover { background: rgba(232,90,60,0.1); }
+.itin-item .move-btns {
+display: flex;
+gap: 4px;
+margin-top: 6px;
+}
+.itin-item .move-btns select {
+font-size: 11px;
+padding: 3px 6px;
+border: 1px solid var(–line);
+border-radius: 4px;
+font-family: ‘Manrope’, sans-serif;
+background: white;
+}
+
+/* ───── Modal ───── */
+.modal-bg {
+position: fixed;
+inset: 0;
+background: rgba(13,31,45,0.6);
+display: none;
+align-items: center;
+justify-content: center;
+z-index: 1000;
+padding: 20px;
+}
+.modal-bg.show { display: flex; }
+.modal {
+background: white;
+border-radius: 14px;
+max-width: 500px;
+width: 100%;
+padding: 28px;
+box-shadow: var(–shadow-lg);
+position: relative;
+}
+.modal h3 {
+font-family: ‘Fraunces’, serif;
+font-size: 26px;
+font-weight: 500;
+margin-bottom: 6px;
+}
+.modal .modal-sub { font-size: 13px; color: var(–ink-2); margin-bottom: 18px; }
+.modal label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.modal select {
+width: 100%;
+padding: 10px 12px;
+border: 1px solid var(–line-strong);
+border-radius: 8px;
+font-size: 14px;
+margin-bottom: 14px;
+font-family: ‘Manrope’, sans-serif;
+background: white;
+}
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+
+/* ───── Trip Overview ───── */
+.overview-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: 18px;
+margin-bottom: 28px;
+}
+.ocard {
+background: white;
+border: 1px solid var(–line);
+border-radius: 12px;
+padding: 22px;
+box-shadow: var(–shadow-sm);
+}
+.ocard h3 {
+font-family: ‘Fraunces’, serif;
+font-size: 20px;
+font-weight: 500;
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.ocard h3 .icon { font-size: 22px; }
+.ocard ul { list-style: none; }
+.ocard ul li {
+font-size: 13.5px;
+padding: 5px 0;
+border-bottom: 1px dashed var(–line);
+display: flex;
+justify-content: space-between;
+gap: 8px;
+}
+.ocard ul li:last-child { border-bottom: none; }
+.ocard ul li strong { font-weight: 600; }
+.ocard ul li .v { color: var(–ink-2); font-family: ‘JetBrains Mono’, monospace; font-size: 12px; }
+
+.key-fact {
+background: linear-gradient(135deg, rgba(43,182,196,0.08), rgba(244,185,66,0.08));
+border-left: 3px solid var(–turquoise);
+padding: 14px 18px;
+border-radius: 0 8px 8px 0;
+margin-bottom: 14px;
+font-size: 13.5px;
+}
+.key-fact strong { color: var(–sea); font-weight: 700; }
+
+/* ───── Footer ───── */
+footer {
+background: var(–ink);
+color: var(–sand);
+padding: 30px 24px;
+margin-top: 60px;
+text-align: center;
+font-size: 12px;
+font-family: ‘JetBrains Mono’, monospace;
+}
+footer .opacity { opacity: 0.6; }
+
+/* ───── Mobile ───── */
+@media (max-width: 720px) {
+header.hero { padding: 28px 20px 22px; }
+.hero-grid { grid-template-columns: 1fr; }
+.countdown { text-align: left; }
+.countdown .num { font-size: 48px; }
+main { padding: 24px 16px 60px; }
+.grid { grid-template-columns: 1fr; }
+.meta-row { font-size: 12px; gap: 12px 18px; }
+.tab { padding: 14px 16px; font-size: 11px; }
+}
+</style>
+
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Chitsaz Family · June 5–14, 2026</div>
+      <h1 class="title">Curaçao<br><em>nine days, one island.</em></h1>
+      <div class="meta-row">
+        <span><strong>BASE</strong>ONE Mambo Beach</span>
+        <span><strong>ARR</strong>Sat Jun 6 · 12:30 PM</span>
+        <span><strong>DEP</strong>Sun Jun 14 · 1:23 PM</span>
+        <span><strong>PARTY</strong>Ali · Kristen · Kamran · Ashton</span>
+      </div>
+    </div>
+    <div class="countdown">
+      <span class="num" id="countdown">—</span>
+      <span class="label">days to go</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-inner">
+    <button class="tab active" data-tab="overview">Overview</button>
+    <button class="tab" data-tab="weather">Weather</button>
+    <button class="tab" data-tab="beaches">Beaches <span class="count" id="ct-beaches"></span></button>
+    <button class="tab" data-tab="restaurants">Food <span class="count" id="ct-restaurants"></span></button>
+    <button class="tab" data-tab="excursions">Excursions <span class="count" id="ct-excursions"></span></button>
+    <button class="tab" data-tab="itinerary">Itinerary</button>
+    <button class="tab" data-tab="essentials">Essentials</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ─── OVERVIEW ─── -->
+
+<section class="section active" id="overview">
+  <h2 class="section-title">Trip <em>overview</em>.</h2>
+  <p class="section-sub">Everything you need to orient yourself, at a glance. Use the tabs above to drill into beaches, restaurants, excursions, and weather. Build your day-by-day plan in the Itinerary tab.</p>
+
+  <div class="key-fact">
+    <strong>Curaçao sits outside the Atlantic hurricane belt.</strong> June is warm and reliable — average highs ~89°F (32°C), water ~80°F (27°C), 6–7 light-shower days in the month, and constant easterly trade winds (~16 kt). Showers tend to be short bursts in the early morning or late at night. UV index is consistently very high — sunscreen is non-negotiable.
+  </div>
+
+  <div class="overview-grid">
+    <div class="ocard">
+      <h3><span class="icon">🏖️</span>Home base</h3>
+      <ul>
+        <li><strong>ONE Mambo Beach</strong><span class="v">Mambo Beach Boulevard</span></li>
+        <li><strong>Beach access</strong><span class="v">on-site</span></li>
+        <li><strong>Sea Aquarium</strong><span class="v">5-min walk</span></li>
+        <li><strong>Willemstad / Punda</strong><span class="v">~10 min</span></li>
+        <li><strong>Hato Airport (CUR)</strong><span class="v">~25 min</span></li>
+        <li><strong>Jan Thiel Beach</strong><span class="v">~10 min</span></li>
+        <li><strong>Spanish Water marina</strong><span class="v">~12 min</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">🌡️</span>What to pack for June</h3>
+      <ul>
+        <li>Reef-safe SPF 50+<span class="v">required</span></li>
+        <li>Water shoes<span class="v">rocky entries</span></li>
+        <li>Snorkel mask × 4<span class="v">save rentals</span></li>
+        <li>Light long sleeves<span class="v">sun + AC</span></li>
+        <li>Quick-dry beach towels<span class="v">most beaches don't supply</span></li>
+        <li>Cash USD or NAf<span class="v">small beaches/snack bars</span></li>
+        <li>Insulated water bottles<span class="v">heat & wind</span></li>
+        <li>Light rain shell<span class="v">brief showers possible</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">🚗</span>Getting around</h3>
+      <ul>
+        <li>Rental car<span class="v">strongly recommended</span></li>
+        <li>Drive on the<span class="v">RIGHT (US-style)</span></li>
+        <li>Currency<span class="v">NAf or USD widely accepted</span></li>
+        <li>Language<span class="v">Dutch / Papiamento / English / Spanish</span></li>
+        <li>Tipping<span class="v">often included; 10% extra is courteous</span></li>
+        <li>Power<span class="v">127V/50Hz — US plugs work, slow charging</span></li>
+        <li>Time zone<span class="v">AST (UTC-4), no DST</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">🌊</span>Geography quick-take</h3>
+      <ul>
+        <li>South coast (incl. Mambo)<span class="v">calm, swimmable</span></li>
+        <li>North coast<span class="v">wild, surf, no swimming</span></li>
+        <li>West end (Westpunt)<span class="v">best beaches, ~1 hr drive</span></li>
+        <li>East end (Spanish Water)<span class="v">marina, Klein boats</span></li>
+        <li>Klein Curaçao<span class="v">9 mi offshore SE, boat-only</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin:36px 0 14px;">Trip-day calendar</h3>
+  <div id="trip-calendar" class="weather-grid"></div>
+</section>
+
+<!-- ─── WEATHER ─── -->
+
+<section class="section" id="weather">
+  <h2 class="section-title">Live <em>weather</em>.</h2>
+  <p class="section-sub">Live forecast pulled from Open-Meteo for Mambo Beach (12.08°N, 68.89°W). Data refreshes every time you open the page. Forecasts beyond 14 days fall back to June climatology.</p>
+  <div class="weather-status" id="weather-status">
+    <span class="dot"></span><span id="weather-status-text">Loading live forecast…</span>
+  </div>
+  <div id="weather-grid" class="weather-grid"></div>
+
+  <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin:36px 0 14px;">June climatology context</h3>
+  <div class="overview-grid">
+    <div class="ocard">
+      <h3>Temperature</h3>
+      <ul>
+        <li>Avg high<span class="v">89°F / 32°C</span></li>
+        <li>Avg low<span class="v">81°F / 27°C</span></li>
+        <li>Sea temp<span class="v">80°F / 27°C</span></li>
+        <li>Humidity<span class="v">~77%</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3>Rain & sun</h3>
+      <ul>
+        <li>Rainy days<span class="v">~6 in month</span></li>
+        <li>Total rainfall<span class="v">~2.2 in / 56 mm</span></li>
+        <li>Sunshine<span class="v">~9 hrs/day</span></li>
+        <li>UV index<span class="v">very high (10–11)</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3>Wind & sea</h3>
+      <ul>
+        <li>Trade winds<span class="v">E–ENE constant</span></li>
+        <li>Avg wind<span class="v">14–18 kt</span></li>
+        <li>Gusts<span class="v">up to 30 mph</span></li>
+        <li>Hurricane risk<span class="v">extremely low</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3>Sunrise / sunset (June)</h3>
+      <ul>
+        <li>Sunrise<span class="v">~6:00 AM</span></li>
+        <li>Sunset<span class="v">~7:00 PM</span></li>
+        <li>Daylight<span class="v">~13 hrs</span></li>
+        <li>Best beach hours<span class="v">7–10 AM, 3–6 PM</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BEACHES ─── -->
+
+<section class="section" id="beaches">
+  <h2 class="section-title">All <em>beaches</em>.</h2>
+  <p class="section-sub">Comprehensive list of every notable beach on Curaçao, organized by region. Drive times are from Mambo Beach. Tags note kid-friendliness, snorkeling, swimming conditions, amenities, and entry fees.</p>
+  <div class="filter-bar">
+    <input type="search" id="beach-search" placeholder="Search beaches…">
+    <button class="chip filter-chip active" data-filter-type="region" data-filter-value="all">All Regions</button>
+    <button class="chip filter-chip" data-filter-type="region" data-filter-value="mambo-area">Mambo Area</button>
+    <button class="chip filter-chip" data-filter-type="region" data-filter-value="willemstad">Willemstad</button>
+    <button class="chip filter-chip" data-filter-type="region" data-filter-value="south-east">SE / Spanish Water</button>
+    <button class="chip filter-chip" data-filter-type="region" data-filter-value="south-west">SW Coast</button>
+    <button class="chip filter-chip" data-filter-type="region" data-filter-value="west-end">Westpunt</button>
+    <button class="chip filter-chip" data-filter-type="region" data-filter-value="north">North Coast</button>
+    <button class="chip filter-chip" data-filter-type="region" data-filter-value="offshore">Offshore</button>
+    <button class="chip filter-chip" data-filter-type="tag" data-filter-value="kid">Kid-friendly</button>
+    <button class="chip filter-chip" data-filter-type="tag" data-filter-value="snorkel">Snorkel</button>
+    <button class="chip filter-chip" data-filter-type="tag" data-filter-value="turtles">Sea turtles</button>
+    <button class="chip filter-chip" data-filter-type="tag" data-filter-value="free">Free</button>
+  </div>
+  <div id="beaches-grid" class="grid"></div>
+</section>
+
+<!-- ─── RESTAURANTS ─── -->
+
+<section class="section" id="restaurants">
+  <h2 class="section-title">All <em>food</em>.</h2>
+  <p class="section-sub">Comprehensive food list — Mambo Beach Boulevard, Jan Thiel, Pietermaai, Punda, Otrobanda, and notable spots across the island. Cuisine, vibe, location, and price range tagged for fast filtering.</p>
+  <div class="filter-bar">
+    <input type="search" id="resto-search" placeholder="Search restaurants…">
+    <button class="chip filter-chip-r active" data-filter-type-r="region" data-filter-value-r="all">All</button>
+    <button class="chip filter-chip-r" data-filter-type-r="region" data-filter-value-r="mambo">Mambo Blvd</button>
+    <button class="chip filter-chip-r" data-filter-type-r="region" data-filter-value-r="jan-thiel">Jan Thiel</button>
+    <button class="chip filter-chip-r" data-filter-type-r="region" data-filter-value-r="pietermaai">Pietermaai</button>
+    <button class="chip filter-chip-r" data-filter-type-r="region" data-filter-value-r="punda">Punda</button>
+    <button class="chip filter-chip-r" data-filter-type-r="region" data-filter-value-r="otrobanda">Otrobanda / Riffort</button>
+    <button class="chip filter-chip-r" data-filter-type-r="region" data-filter-value-r="salina">Salina / Saliña</button>
+    <button class="chip filter-chip-r" data-filter-type-r="region" data-filter-value-r="other">Other</button>
+    <button class="chip filter-chip-r" data-filter-type-r="cuisine" data-filter-value-r="seafood">Seafood</button>
+    <button class="chip filter-chip-r" data-filter-type-r="cuisine" data-filter-value-r="italian">Italian</button>
+    <button class="chip filter-chip-r" data-filter-type-r="cuisine" data-filter-value-r="caribbean">Local/Caribbean</button>
+    <button class="chip filter-chip-r" data-filter-type-r="cuisine" data-filter-value-r="steak">Steakhouse</button>
+    <button class="chip filter-chip-r" data-filter-type-r="cuisine" data-filter-value-r="kid">Kid-friendly</button>
+  </div>
+  <div id="restaurants-grid" class="grid"></div>
+</section>
+
+<!-- ─── EXCURSIONS ─── -->
+
+<section class="section" id="excursions">
+  <h2 class="section-title">All <em>excursions</em>.</h2>
+  <p class="section-sub">Full slate of activities, attractions, and excursions — from Klein Curaçao day trips to ATV safaris, snorkel charters, dolphin programs, the Sea Aquarium, Hato Caves, Christoffel Park, and Willemstad cultural sites.</p>
+  <div class="filter-bar">
+    <input type="search" id="exc-search" placeholder="Search excursions…">
+    <button class="chip filter-chip-e active" data-filter-type-e="cat" data-filter-value-e="all">All</button>
+    <button class="chip filter-chip-e" data-filter-type-e="cat" data-filter-value-e="boat">Boat / Water</button>
+    <button class="chip filter-chip-e" data-filter-type-e="cat" data-filter-value-e="land">Land Adventure</button>
+    <button class="chip filter-chip-e" data-filter-type-e="cat" data-filter-value-e="wildlife">Wildlife / Animals</button>
+    <button class="chip filter-chip-e" data-filter-type-e="cat" data-filter-value-e="culture">Culture / History</button>
+    <button class="chip filter-chip-e" data-filter-type-e="cat" data-filter-value-e="active">Active / Adventure</button>
+    <button class="chip filter-chip-e" data-filter-type-e="cat" data-filter-value-e="family">Best for Kids</button>
+  </div>
+  <div id="excursions-grid" class="grid"></div>
+</section>
+
+<!-- ─── ITINERARY ─── -->
+
+<section class="section" id="itinerary">
+  <h2 class="section-title">Your <em>itinerary</em>.</h2>
+  <p class="section-sub">Add items from any tab using the "+ Add to day" button. Saved automatically in your browser. Use the dropdown on each item to move between days.</p>
+  <div style="margin-bottom: 18px; display: flex; gap: 8px; flex-wrap: wrap;">
+    <button class="btn" id="export-itin">📥 Export as text</button>
+    <button class="btn" id="print-itin">🖨️ Print</button>
+    <button class="btn" id="clear-itin" style="border-color: var(--coral); color: var(--coral);">🗑️ Clear all</button>
+  </div>
+  <div id="itinerary-grid" class="itinerary-grid"></div>
+</section>
+
+<!-- ─── ESSENTIALS ─── -->
+
+<section class="section" id="essentials">
+  <h2 class="section-title">Travel <em>essentials</em>.</h2>
+  <p class="section-sub">Practical info: airport, money, language, safety, water, internet, and key phone numbers.</p>
+  <div class="overview-grid">
+    <div class="ocard">
+      <h3><span class="icon">✈️</span>Airport (CUR)</h3>
+      <ul>
+        <li>Hato International<span class="v">~25 min from Mambo</span></li>
+        <li>Customs<span class="v">faster line via APP-pre check</span></li>
+        <li>Onward arrival card<span class="v">required — fill before landing</span></li>
+        <li>Departure tax<span class="v">included in ticket</span></li>
+        <li>Recommended airport arrival<span class="v">~2 hrs before departure</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">💵</span>Money</h3>
+      <ul>
+        <li>Currency<span class="v">Antillean Guilder (NAf)</span></li>
+        <li>USD<span class="v">accepted virtually everywhere</span></li>
+        <li>USD/NAf rate<span class="v">~1.78 fixed</span></li>
+        <li>Cards<span class="v">Visa/MC universal</span></li>
+        <li>ATMs<span class="v">in Punda, Salina, Mambo</span></li>
+        <li>Tipping<span class="v">often added (~10–15%)</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">🗣️</span>Language</h3>
+      <ul>
+        <li>Official<span class="v">Dutch / Papiamento</span></li>
+        <li>Tourism<span class="v">English everywhere</span></li>
+        <li>Also widely spoken<span class="v">Spanish</span></li>
+        <li>"Hello"<span class="v">Bon dia (morning)</span></li>
+        <li>"Thank you"<span class="v">Danki</span></li>
+        <li>"Cheers"<span class="v">Salú</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">🚨</span>Safety & health</h3>
+      <ul>
+        <li>Emergency<span class="v">911</span></li>
+        <li>Police (non-emerg)<span class="v">+599 9 463-0000</span></li>
+        <li>Tap water<span class="v">SAFE — desalinated, drinkable</span></li>
+        <li>Mosquitoes<span class="v">DEET in evening</span></li>
+        <li>Snorkel safety<span class="v">avoid touching coral / lionfish</span></li>
+        <li>Sea urchins<span class="v">water shoes at rocky beaches</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">📶</span>Connectivity</h3>
+      <ul>
+        <li>SIM/eSIM<span class="v">Digicel or Flow</span></li>
+        <li>Most US carriers<span class="v">roam (verify plan)</span></li>
+        <li>Wi-Fi<span class="v">at all resorts/restaurants</span></li>
+        <li>WhatsApp<span class="v">de facto messaging</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">⛽</span>Driving notes</h3>
+      <ul>
+        <li>Drive on<span class="v">right (like US)</span></li>
+        <li>License<span class="v">US driver's license valid</span></li>
+        <li>Speed limit<span class="v">40–80 km/h</span></li>
+        <li>Gas<span class="v">priced per liter; ~$1.30/L</span></li>
+        <li>Roads<span class="v">paved generally; west-end roads narrow</span></li>
+        <li>Westpunt drive<span class="v">~1 hr from Mambo</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">🏥</span>Hospitals & pharmacies</h3>
+      <ul>
+        <li>CMC Hospital<span class="v">Otrobanda — modern, ~10 min</span></li>
+        <li>Botika (pharmacies)<span class="v">throughout island</span></li>
+        <li>24-hr pharmacy<span class="v">rotates — call 911 for nearest</span></li>
+      </ul>
+    </div>
+    <div class="ocard">
+      <h3><span class="icon">📋</span>Useful Apps</h3>
+      <ul>
+        <li>Google Maps<span class="v">works offline if downloaded</span></li>
+        <li>WhatsApp<span class="v">essential</span></li>
+        <li>Uber<span class="v">does NOT operate</span></li>
+        <li>Local taxi<span class="v">Curaçao Taxi (call/WhatsApp)</span></li>
+        <li>Klein Curaçao tickets<span class="v">via operator websites</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Modal for adding to itinerary -->
+
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h3>Add to itinerary</h3>
+    <p class="modal-sub" id="modal-item-name">—</p>
+    <label for="day-select">Choose a day</label>
+    <select id="day-select"></select>
+    <div class="modal-actions">
+      <button class="btn" id="modal-cancel">Cancel</button>
+      <button class="btn btn-primary" id="modal-confirm">Add</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>Built for Ali, Kristen, Kamran & Ashton · Curaçao 2026</div>
+  <div class="opacity" style="margin-top:6px">Live weather: Open-Meteo · Itinerary saved locally · No tracking, no servers</div>
+</footer>
+
+<script>
+/* ============================================================
+   DATA: BEACHES (45+ across all regions of Curaçao)
+============================================================ */
+const BEACHES = [
+  // Mambo Area
+  { name: "Mambo Beach", region: "mambo-area", drive: "0 min — home base", desc: "Curaçao's liveliest man-made beach, protected by stone breakwaters that create a calm, kid-safe lagoon. Long boardwalk with bars, restaurants, and shops. Lounge chair rental ~$4 USD; small entry fee ~$3.50 USD. Snorkel out to the rock barriers for surprisingly good fish sightings, including occasional sea turtles.", tags: ["kid", "swim", "snorkel", "amenities", "shade", "fee"] },
+  { name: "Sea Aquarium Beach", region: "mambo-area", drive: "1 min", desc: "Adjacent to the Curaçao Sea Aquarium, very calm protected swimming, ideal for young kids. Sunscape Curaçao Resort sits behind it. Great for combining a beach morning with the aquarium.", tags: ["kid", "swim", "amenities"] },
+  { name: "Cabana Beach", region: "mambo-area", drive: "2 min", desc: "Small section of Mambo Beach Boulevard with palapa shade and chair rentals. Quieter than the main Mambo strip during weekdays. Same calm protected water.", tags: ["kid", "swim", "amenities"] },
+  { name: "LionsDive Beach", region: "mambo-area", drive: "3 min", desc: "Hotel-fronted beach with the Stella Maris Reef just offshore — one of the better house reefs near Mambo. Snorkel rentals on-site at Ocean Encounters.", tags: ["snorkel", "swim", "amenities"] },
+  { name: "Pirate Bay (Piscadera)", region: "mambo-area", drive: "10 min", desc: "Small cove with a casual restaurant. Quiet, local feel, decent snorkeling along the rocky edges. Free entry.", tags: ["snorkel", "free", "swim"] },
+
+  // Willemstad area
+  { name: "Avila Beach (Penha & Blauw)", region: "willemstad", drive: "10 min", desc: "Small twin coves at the historic Avila Beach Hotel. Calm, very protected, family-friendly. Public beach access through hotel; small consumption minimum at the restaurant.", tags: ["kid", "swim", "amenities"] },
+  { name: "Kontiki Beach", region: "willemstad", drive: "5 min", desc: "Adjacent to Mambo. Small, sandy, with a relaxed restaurant. Calm water for kids.", tags: ["kid", "swim", "amenities"] },
+
+  // South-East / Spanish Water
+  { name: "Jan Thiel Beach", region: "south-east", drive: "10 min", desc: "Mambo's grown-up sibling: full-service, lively, party vibe in the evenings. Multiple beach clubs (Zanzibar, Zest), water sports, kid swim areas, casino nearby. Entry fee ~$3.50 USD.", tags: ["kid", "swim", "amenities", "fee"] },
+  { name: "Caracasbaai Beach", region: "south-east", drive: "20 min", desc: "Deep-water bay where an oil terminal once stood. Rocky entry. Good shore diving and snorkeling site, popular with locals on weekends.", tags: ["snorkel", "free"] },
+  { name: "Tugboat Beach", region: "south-east", drive: "22 min", desc: "Small pebble beach in Caracas Bay, named for the famous shallow shipwreck just offshore — Curaçao's most iconic snorkel/dive site. Wreck sits in ~15 ft of water, teeming with fish and corals. Bring water shoes.", tags: ["snorkel", "free"] },
+  { name: "Director's Bay (Bahía del Director)", region: "south-east", drive: "25 min", desc: "Once a private beach for the Shell director. Small, scenic cove with rocky entry, excellent snorkeling and the remains of an old shark cage. Steep stairs down.", tags: ["snorkel", "free"] },
+  { name: "Baya Beach (Baya Beach Club)", region: "south-east", drive: "22 min", desc: "Beach club at Caracas Bay with sandy area, restaurant, bar, and water sports. Fee for chairs.", tags: ["amenities", "fee"] },
+  { name: "Santa Barbara Beach", region: "south-east", drive: "25 min", desc: "Inside the gated Santa Barbara Beach & Golf Resort. White sand, calm water, kayak/SUP rentals, dock-protected swimming. Public access via Old Quarry entrance with small fee. Miss Ann boats to Klein Curaçao depart from the marina.", tags: ["kid", "swim", "amenities", "fee"] },
+
+  // South-West Coast (Willemstad → Westpunt)
+  { name: "Blue Bay Beach", region: "south-west", drive: "20 min", desc: "Resort-fronted beach with palms, calm water, dive shop, two restaurants (Coast & Brass Boer). Good shore snorkeling. Entrance fee ~$5 USD for non-guests.", tags: ["snorkel", "swim", "kid", "amenities", "fee"] },
+  { name: "Daaibooi Beach", region: "south-west", drive: "30 min", desc: "Free public beach with a long stretch of sand, palapas, and decent shore snorkeling. Local favorite, busy on weekends. No entry fee.", tags: ["snorkel", "free", "swim"] },
+  { name: "Playa Porto Mari", region: "south-west", drive: "35 min", desc: "Beautiful crescent of sand with double reef snorkeling — two parallel reefs offshore. Restaurant, chair rentals, and famous resident pigs that wander the beach. Entry fee ~$3 USD.", tags: ["snorkel", "kid", "amenities", "fee"] },
+  { name: "Cas Abao Beach", region: "south-west", drive: "40 min", desc: "Often ranked among Curaçao's best: postcard turquoise water, white sand, palapas, full restaurant, dive shop, massage hut. Excellent shore snorkel — coral patches just offshore. Entry fee ~$8 USD per car or per person.", tags: ["snorkel", "kid", "swim", "amenities", "fee"] },
+  { name: "Playa Hundu", region: "south-west", drive: "45 min", desc: "Quiet, lesser-known cove with rocky entry. Locals' spot, very few tourists. Bring everything; no facilities.", tags: ["free"] },
+  { name: "Playa Jeremi", region: "south-west", drive: "50 min", desc: "Hidden, rocky local beach with one palapa and a parking lot. Good snorkeling, very few amenities. Free.", tags: ["snorkel", "free"] },
+  { name: "Playa Lagun", region: "south-west", drive: "55 min", desc: "Small narrow cove flanked by limestone cliffs. The single best shore-snorkeling spot for sea turtles on the main island — they cruise into the bay regularly. Restaurant on-site, chair rental.", tags: ["snorkel", "turtles", "kid", "amenities"] },
+  { name: "Playa Santa Cruz", region: "south-west", drive: "58 min", desc: "Long crescent of sand, reasonably calm, with a few small restaurants. Boat trips to the famous Blue Room cave depart from here. Free public access.", tags: ["free", "swim"] },
+
+  // West End / Westpunt
+  { name: "Playa Kalki (Alice in Wonderland)", region: "west-end", drive: "65 min", desc: "Northernmost snorkeling beach — clear water, healthy reef just offshore, dive shop and restaurant. Steep stairs from the parking lot down to a rocky/sandy beach. Excellent for confident snorkelers.", tags: ["snorkel", "amenities"] },
+  { name: "Playa Forti", region: "west-end", drive: "63 min", desc: "Famous for cliff jumping — popular spot for daredevils to leap from a 10m cliff next to the restaurant. Rocky beach below; limited swimming, decent snorkeling. Restaurant with epic views.", tags: ["snorkel", "amenities"] },
+  { name: "Playa Grandi (Playa Piskado)", region: "west-end", drive: "62 min", desc: "Tiny working fishing beach where local fishermen clean their catch — drawing sea turtles in by the dozen. World-famous spot to swim with green sea turtles. Crowded by 10 AM. Snorkel rental nearby. Free.", tags: ["snorkel", "turtles", "free"] },
+  { name: "Knip Beach (Grote Knip / Playa Kenepa Grandi)", region: "west-end", drive: "60 min", desc: "Many call this the most beautiful beach on Curaçao — wide bay, blinding white sand, surreal turquoise. Cliffs on either side. Snorkel rentals, snack bar, BBQ stand. Free entry. Can get crowded on weekends.", tags: ["snorkel", "kid", "swim", "free"] },
+  { name: "Little Knip (Klein Knip / Playa Kenepa Chiki)", region: "west-end", drive: "58 min", desc: "Smaller, quieter sister to Grote Knip. Rated among the top beaches in the Caribbean. Excellent snorkeling along both rocky cliff edges — elkhorn coral patches and reef fish. Limited shade.", tags: ["snorkel", "free", "swim"] },
+
+  // North Coast (rough, mostly not for swimming)
+  { name: "Playa Kanoa", region: "north", drive: "50 min", desc: "One of the few accessible north-coast beaches. Surf break when conditions align. Strong currents — not for swimming. A small protected pool formed by collapsed sea cave. Local surf-school spot.", tags: ["free"] },
+  { name: "Boka Tabla (Shete Boka)", region: "north", drive: "70 min", desc: "Inside Shete Boka National Park. Not a swim beach — instead, a dramatic underground cave where waves crash spectacularly. Walking trails along the wild north coast. Park entry fee ~$10 USD.", tags: ["fee"] },
+  { name: "Boka Pistol (Shete Boka)", region: "north", drive: "70 min", desc: "Within Shete Boka — waves explode against rocks, sounding like cannon fire. Photogenic, no swimming. Combine with Boka Tabla for a north-coast hike.", tags: ["fee"] },
+
+  // Offshore
+  { name: "Klein Curaçao", region: "offshore", drive: "Boat: ~1.5 hr from Spanish Water", desc: "Uninhabited 1.7 sq km island ~9 mi off the SE coast. Pearl-white sand, the iconic pink lighthouse, shipwrecks visible from shore, healthy reef with green sea turtles. Boat-only access via Miss Ann, Mermaid, BlueFinn, or Irie Tours. Full-day excursion ~$140–170 USD adults, ~$70 kids, includes BBQ lunch and open bar.", tags: ["snorkel", "turtles", "kid", "swim"] },
+];
+
+/* ============================================================
+   DATA: RESTAURANTS (60+ across all areas of Curaçao)
+============================================================ */
+const RESTAURANTS = [
+  // Mambo Beach Boulevard
+  { name: "Madero Ocean Club", region: "mambo", cuisine: ["seafood", "international"], price: "$$$", vibe: "Beach club + restaurant; brunch Sat/Sun 11–3", desc: "Beachfront beach club on Mambo Boulevard with a refined restaurant: locally sourced fish, vegetables. Strong cocktails, live DJs at night. Daybeds and cabanas; full restaurant menu.", tags: ["kid"] },
+  { name: "Bonita Beach Club", region: "mambo", cuisine: ["international"], price: "$$", vibe: "Casual rustic beach club, 200+ beach beds", desc: "Cozy rustic-edged beach club with all-day food, happy hours Friday 5:30–7 and Sunday 5–6. Lunch & dinner menus, kid-friendly, hosts private events. Cashless.", tags: ["kid"] },
+  { name: "Wet & Wild Beach Club", region: "mambo", cuisine: ["bar"], price: "$$", vibe: "Beach bar, weekly events, DJ Friday/Sunday", desc: "Fun beach bar with tabletop games, pub quiz nights, bingo, movie night, live bands. Mojito bar Sundays. Cashless.", tags: [] },
+  { name: "Pizza Mare Ristorante Italiano", region: "mambo", cuisine: ["italian", "kid"], price: "$$", vibe: "Outdoor casual Italian, kid favorite", desc: "Beachside Italian on Mambo Boulevard. Wood-fired pizza, pasta, fish specialties. Easy choice for kids. Laid-back outdoor seating.", tags: ["kid"] },
+  { name: "Bigeye Scad", region: "mambo", cuisine: ["seafood", "caribbean"], price: "$$", vibe: "Local seafood, sunset views", desc: "Casual local seafood near Mambo Beach. Daily fresh catch — mahi mahi, red snapper, Caribbean preparations. Sunset spot.", tags: [] },
+  { name: "Greenhouse Restaurant", region: "mambo", cuisine: ["caribbean", "international"], price: "$$$", vibe: "Caribbean-Mediterranean fusion", desc: "Run by three Lebanese brothers — fusion of Caribbean, Mediterranean, and Lebanese flavors. Beef, ribs, local 'stoba', seafood, large portions.", tags: [] },
+  { name: "El Grill & El Mexicano", region: "mambo", cuisine: ["mexican"], price: "$$", vibe: "Mexican restaurant on the boulevard", desc: "Mexican menu — combinations, fajitas, margaritas. Upper level of Mambo Boulevard.", tags: ["kid"] },
+  { name: "Bocas Restaurant", region: "mambo", cuisine: ["caribbean", "seafood"], price: "$$$", vibe: "Waterfront Caribbean", desc: "Mambo-area waterfront spot featuring Caribbean flavors and seafood with views.", tags: [] },
+  { name: "Pizza Hut Mambo", region: "mambo", cuisine: ["italian", "kid"], price: "$", vibe: "Familiar fast-casual chain", desc: "International chain on Mambo Boulevard — easy backup for picky kid nights.", tags: ["kid"] },
+  { name: "Hemingway", region: "mambo", cuisine: ["international"], price: "$$$", vibe: "Romantic, live music from 5 PM", desc: "International menu with romantic atmosphere and live music in the evenings.", tags: [] },
+
+  // Jan Thiel
+  { name: "Zanzibar Beach & Restaurant", region: "jan-thiel", cuisine: ["international", "seafood"], price: "$$$", vibe: "Beach club with full-service restaurant", desc: "Iconic Jan Thiel beach club. International menu, sunset cocktails, live music nights, kid-friendly during day, party vibe at night.", tags: ["kid"] },
+  { name: "Zest Restaurant & Beach Cafe", region: "jan-thiel", cuisine: ["caribbean", "international"], price: "$$$", vibe: "Caribbean-Mediterranean beachfront", desc: "Beachfront cafe in Jan Thiel with Caribbean-Mediterranean cuisine, fresh fish, and good cocktails. Breakfast, lunch, dinner.", tags: ["kid"] },
+  { name: "Infinity Beach Club & Infinity by Night", region: "jan-thiel", cuisine: ["international", "fine-dining"], price: "$$$$", vibe: "Daytime beach club, evening fine dining", desc: "Splashy day-club with infinity pool transforming at night into Infinity by Night, an elevated tasting-menu experience.", tags: [] },
+  { name: "Tinto Wine & Tapas", region: "jan-thiel", cuisine: ["spanish", "tapas"], price: "$$$", vibe: "Wine bar / tapas in Jan Thiel village", desc: "Spanish-style tapas with strong wine list. Good for couples-only dinner if babysitting.", tags: [] },
+  { name: "Karakter Beach Bar", region: "jan-thiel", cuisine: ["international"], price: "$$", vibe: "Casual Coral Estate beach bar", desc: "Casual beachside dining — burgers, salads, fresh juice, and sunset cocktails.", tags: ["kid"] },
+
+  // Pietermaai
+  { name: "BijBlauw", region: "pietermaai", cuisine: ["seafood", "steak"], price: "$$$", vibe: "Oceanfront, courtyard, breakfast → dinner", desc: "Oceanfront restaurant in Pietermaai — charcoal-oven steaks, fresh seafood, beautiful courtyard. Breakfast, lunch, dinner.", tags: [] },
+  { name: "Mundo Bizarro", region: "pietermaai", cuisine: ["caribbean", "cuban"], price: "$$$", vibe: "Cuban-vibe Pietermaai institution", desc: "Iconic Pietermaai spot with Cuban-Caribbean food, mojitos, live music, salsa nights. Stays open late.", tags: [] },
+  { name: "Ginger", region: "pietermaai", cuisine: ["asian", "fusion"], price: "$$$", vibe: "Asian fusion in Pietermaai", desc: "Asian-fusion small plates — sushi, dim sum, fusion mains. Stylish, popular with locals.", tags: [] },
+  { name: "Saint Tropez Ocean Club", region: "pietermaai", cuisine: ["mediterranean", "international"], price: "$$$$", vibe: "Boutique hotel restaurant + pool", desc: "Mediterranean menu, sea-front pool deck, fine dining vibe. Pricier; popular for date nights.", tags: [] },
+  { name: "Kome", region: "pietermaai", cuisine: ["international", "farm-to-table"], price: "$$$", vibe: "Casual, locally-sourced", desc: "Small farm-to-table spot — daily-changing menu, fresh local ingredients. Charming neighborhood vibe.", tags: [] },
+  { name: "Pietermaai Sunday Pop-up Markets", region: "pietermaai", cuisine: ["caribbean", "kid"], price: "$", vibe: "Sunday street food", desc: "Sunday food trucks and pop-ups in the Pietermaai district — good for grazing with kids.", tags: ["kid"] },
+
+  // Punda
+  { name: "Plasa Bieu (Old Market)", region: "punda", cuisine: ["caribbean", "kid"], price: "$", vibe: "Authentic local lunch hall", desc: "Iconic open-air food hall in Punda — authentic Curaçaoan home cooking: stoba (stew), funchi, kabritu, fresh fish. Lunch only, cash preferred.", tags: ["kid"] },
+  { name: "Iguana Café", region: "punda", cuisine: ["caribbean"], price: "$$", vibe: "Casual, central, terrace overlooking Handelskade", desc: "Casual restaurant in Punda with great views of the colorful Handelskade waterfront. Caribbean and international menu.", tags: ["kid"] },
+  { name: "Gouverneur de Rouville", region: "otrobanda", cuisine: ["dutch", "caribbean"], price: "$$$", vibe: "Historic mansion overlooking Punda", desc: "Restaurant in a historic colonial mansion at Otrobanda overlooking St. Anna Bay. Sunset cocktails with the Queen Emma Bridge in view.", tags: [] },
+  { name: "Floris Suite Hotel Restaurant", region: "punda", cuisine: ["dutch", "international"], price: "$$$", vibe: "Boutique hotel dining", desc: "Stylish hotel restaurant; Dutch and international with seafood focus.", tags: [] },
+  { name: "De Snoek (in Floating Market area)", region: "punda", cuisine: ["seafood", "caribbean"], price: "$$", vibe: "Floating market lunch", desc: "Casual lunch spot at the floating market in Punda where Venezuelan boats dock with fresh produce. Atmospheric.", tags: [] },
+
+  // Otrobanda / Riffort
+  { name: "Riffort Village restaurants", region: "otrobanda", cuisine: ["international", "kid"], price: "$$", vibe: "Cluster of restaurants in historic fort", desc: "Multiple restaurants inside the renovated Riffort, ranging from casual cafés to nicer bistros. Great views of the Queen Emma Bridge.", tags: ["kid"] },
+  { name: "Karens Bagels & More", region: "otrobanda", cuisine: ["breakfast", "kid"], price: "$", vibe: "Breakfast & sandwiches", desc: "Easy breakfast spot — bagels, pastries, sandwiches, smoothies. Kid-friendly. Quick before exploring Otrobanda.", tags: ["kid"] },
+  { name: "Brion Plaza", region: "otrobanda", cuisine: ["caribbean", "kid"], price: "$", vibe: "Plaza with food carts and casual eats", desc: "Open plaza in Otrobanda with food carts, snack bars, and casual dining options.", tags: ["kid"] },
+  { name: "Renaissance Curacao Resort restaurants", region: "otrobanda", cuisine: ["international"], price: "$$$", vibe: "Resort dining cluster", desc: "Multiple options inside the Renaissance complex including an infinity pool deck overlooking the harbor.", tags: ["kid"] },
+
+  // Salina / Saliña (commercial / dining district near Mambo)
+  { name: "Fish & Joy Bistro & Wine Bar", region: "salina", cuisine: ["seafood"], price: "$$$", vibe: "Caribbean seafood bistro", desc: "Quality Caribbean-seafood-focused bistro and wine bar. Story-driven plates, intimate setting.", tags: [] },
+  { name: "Surf & Turf", region: "salina", cuisine: ["steak", "seafood"], price: "$$$", vibe: "Steak & seafood combo concept", desc: "Steakhouse with seafood pairings — classic combo done well. Salina location.", tags: [] },
+  { name: "Fusions Restaurant & Bar", region: "salina", cuisine: ["caribbean", "international"], price: "$$", vibe: "Caribbean / international", desc: "Local-flavor-meets-international restaurant and bar in Salina.", tags: [] },
+  { name: "Olas & Copas", region: "salina", cuisine: ["seafood"], price: "$$$", vibe: "Seafood + ocean views", desc: "Seafood-focused with breathtaking views, Salina/coastal setting.", tags: [] },
+  { name: "Nemo Restaurant", region: "salina", cuisine: ["seafood", "japanese"], price: "$$$", vibe: "Sushi + seafood with ocean views", desc: "Seafood and sushi with ocean views. Strong local following; Monday all-you-can-eat sushi nights.", tags: [] },
+  { name: "JFK Steakhouse", region: "salina", cuisine: ["steak"], price: "$$$$", vibe: "American-style flagship steakhouse", desc: "Curaçao's first dedicated American steakhouse — premium cuts, refined technique, curated wines. Newer, upscale.", tags: [] },
+  { name: "Origami Sushi", region: "salina", cuisine: ["japanese"], price: "$$", vibe: "Sushi specialist, Mon AYCE", desc: "Japanese sushi spot known for Monday all-you-can-eat sushi nights. Very popular with locals — book ahead.", tags: ["kid"] },
+  { name: "The Don Street Restaurant", region: "salina", cuisine: ["bbq", "international"], price: "$$$", vibe: "BBQ + international flair", desc: "BBQ-forward menu with international touches. Solid for a big group.", tags: ["kid"] },
+  { name: "Bario Hotel Restaurant", region: "salina", cuisine: ["international"], price: "$$$", vibe: "Boutique hotel kitchen", desc: "Cozy boutique-hotel kitchen with creative international menu.", tags: [] },
+
+  // Other / fine dining
+  { name: "Baoase (Baoase Luxury Resort)", region: "other", cuisine: ["fine-dining", "seafood"], price: "$$$$", vibe: "Top-end, romantic, beachfront", desc: "Curaçao's most acclaimed fine-dining restaurant inside the Baoase Luxury Resort. Multi-course menus, beachfront pavilions, gold-standard service. Reservations far in advance.", tags: [] },
+  { name: "La Balandra (Harbour Village, Bonaire-style)", region: "other", cuisine: ["seafood", "fine-dining"], price: "$$$$", vibe: "Boat-shaped over-water dining", desc: "Boat-shaped dining room over the water with 'aquarium seats' lit by underwater LCDs. Premier seafood, sunset views.", tags: [] },
+  { name: "Brass Boer (Blue Bay)", region: "other", cuisine: ["fine-dining", "seafood"], price: "$$$$", vibe: "Brothers Boer concept (Michelin pedigree)", desc: "Sister of the Michelin-starred Dutch original. Tasting menus, top-tier seafood, beach views at Blue Bay.", tags: [] },
+  { name: "Coast Restaurant (Blue Bay)", region: "other", cuisine: ["international"], price: "$$$", vibe: "Beachfront casual at Blue Bay", desc: "Casual sister concept to Brass Boer — beachfront casual dining at Blue Bay.", tags: ["kid"] },
+  { name: "Restaurant Fort Nassau", region: "other", cuisine: ["international", "fine-dining"], price: "$$$$", vibe: "Hilltop fortress with panoramic views", desc: "Restaurant inside an 18th-century hilltop fortress — full panoramic 360° view of Willemstad and the harbor. Sunset reservations sell out.", tags: [] },
+  { name: "Kome (Pietermaai sister concept)", region: "other", cuisine: ["international"], price: "$$$", vibe: "Daily menu", desc: "Small ever-changing menu, locally sourced. Listed twice as it appears in multiple guides under different addresses.", tags: [] },
+  { name: "Restaurant & Café Old Market 'Marshe'", region: "other", cuisine: ["caribbean"], price: "$", vibe: "Dutch-Caribbean home cooking", desc: "Local lunch institution — same concept as Plasa Bieu, family recipes, low prices, lots of regulars.", tags: ["kid"] },
+  { name: "Number Ten (#10) Pietermaai", region: "pietermaai", cuisine: ["international"], price: "$$$", vibe: "Pietermaai restaurant + bar", desc: "Modern eclectic menu in the Pietermaai scene — small plates, cocktails, cozy.", tags: [] },
+  { name: "Scampi's Pietermaai", region: "pietermaai", cuisine: ["seafood"], price: "$$", vibe: "Casual seafood", desc: "Pietermaai casual seafood — shrimp specialties, fish & chips style menu.", tags: ["kid"] },
+  { name: "Rozendaels", region: "other", cuisine: ["dutch", "caribbean"], price: "$$$", vibe: "Local Dutch-Curaçaoan restaurant", desc: "Established Dutch-Curaçaoan restaurant with traditional menu and friendly atmosphere.", tags: [] },
+  { name: "Number Ten Steak House", region: "salina", cuisine: ["steak"], price: "$$$$", vibe: "Premium steakhouse", desc: "Premium dry-aged steaks, dressier night out.", tags: [] },
+  { name: "Triton Restaurant", region: "other", cuisine: ["seafood", "fine-dining"], price: "$$$$", vibe: "Lions Dive Beach Resort flagship", desc: "Lions Dive Beach Resort's flagship — local seafood with elevated technique, oceanfront seating.", tags: [] },
+  { name: "Soul Beach Cafe (Pirate Bay)", region: "other", cuisine: ["caribbean"], price: "$$", vibe: "Casual beachfront, live music weekends", desc: "Casual beachfront café at Pirate Bay near Piscadera. Good for chill lunch with feet in the sand.", tags: ["kid"] },
+  { name: "Sambal Indonesian Restaurant", region: "salina", cuisine: ["asian"], price: "$$", vibe: "Indonesian rijsttafel", desc: "Authentic Indonesian rijsttafel (rice table) — lots of small plates, perfect for sharing.", tags: ["kid"] },
+  { name: "Caribbean Chinese (multiple locations)", region: "other", cuisine: ["asian", "kid"], price: "$", vibe: "Casual Chinese-Caribbean", desc: "Casual takeout/dine-in Chinese-Caribbean fusion — easy kid dinner option, found across the island.", tags: ["kid"] },
+  { name: "Ice cream — De IJscokar / Movenpick (mall)", region: "salina", cuisine: ["dessert", "kid"], price: "$", vibe: "Ice cream stops", desc: "Ice cream parlors at Sambil Mall and around Salina — Movenpick branded for premium. Easy after-dinner kid win.", tags: ["kid"] },
+  { name: "Kokomo Beach Restaurant", region: "other", cuisine: ["international"], price: "$$", vibe: "Beachfront casual at Kokomo Beach", desc: "Restaurant on Kokomo Beach (south-west coast just outside Willemstad) — casual menu, famous swing in the water.", tags: ["kid"] },
+  { name: "Cabana Beach Restaurant", region: "mambo", cuisine: ["international", "kid"], price: "$$", vibe: "Casual Mambo Boulevard restaurant", desc: "Casual restaurant on the boulevard — quick lunch, kid-friendly, easy to wander to from the beach.", tags: ["kid"] },
+  { name: "Floating Market (Punda) lunch counters", region: "punda", cuisine: ["caribbean"], price: "$", vibe: "Venezuelan boats / market food", desc: "Working market where Venezuelan boats sell produce; a few lunch counters serve fresh ceviche, empanadas, and grilled fish.", tags: ["kid"] },
+  { name: "Kura Hulanda Lodge restaurants (Westpunt)", region: "other", cuisine: ["caribbean", "international"], price: "$$$", vibe: "Westpunt boutique resort dining", desc: "If exploring the west end, the Kura Hulanda Lodge has multiple dining options including beachfront seafood.", tags: [] },
+  { name: "Restaurant Jaanchies (Westpunt)", region: "other", cuisine: ["caribbean"], price: "$$", vibe: "Famous local Westpunt institution", desc: "Iconic west-end restaurant — Jaanchie himself recites the daily menu (no printed menu). Iguana stew is a signature. A must if doing Knip/Westpunt.", tags: [] },
+  { name: "Sol Food Truck Park", region: "other", cuisine: ["caribbean", "kid"], price: "$", vibe: "Outdoor food truck collective", desc: "Outdoor food truck park with rotating vendors — easy way to let everyone pick something different.", tags: ["kid"] },
+];
+
+/* ============================================================
+   DATA: EXCURSIONS / ATTRACTIONS / ACTIVITIES
+============================================================ */
+const EXCURSIONS = [
+  // Boat / Water
+  { name: "Klein Curaçao Day Trip — Miss Ann", cat: "boat", duration: "8.5 hrs", price: "$170 adult", family: "yes", desc: "The longest-running operator (35+ years). Departs Spanish Water 8:30 AM, arrives Klein in 1 hr (faster than competitors). Full beach house with shade, sunbeds, restrooms, freshwater showers, BBQ buffet, open bar 12–6 PM. Snorkel with sea turtles, see the pink lighthouse and shipwrecks." },
+  { name: "Klein Curaçao Day Trip — Mermaid", cat: "boat", duration: "9.5 hrs", price: "$165 adult", family: "yes", desc: "Established Klein Curaçao operator (35+ years) with private beach house, lounge chairs, parasols, toilets, freshwater showers. All-inclusive open bar, BBQ lunch, happy hour return cocktail." },
+  { name: "Klein Curaçao Day Trip — BlueFinn Catamaran", cat: "boat", duration: "Full day", price: "$140 adult / $70 kids 4–12", family: "yes", desc: "Catamaran from Mood Beach (Mambo Boulevard) every Monday at 10:30 AM. BBQ lunch on board, unlimited drinks, snorkeling at the island. Kids' rate is excellent value." },
+  { name: "West Coast Snorkel & Beach Hop — Catamaran", cat: "boat", duration: "5 hrs", price: "~$95", family: "yes", desc: "Catamaran along the south-west coast hitting 2–3 snorkel spots (often the Tugboat wreck) and stopping at a beach. Lunch and drinks included on most." },
+  { name: "Sunset Catamaran Cruise", cat: "boat", duration: "2.5 hrs", price: "~$60", family: "yes", desc: "Sunset cruise typically along Spanish Water and the south coast. Drinks and small bites included; live music on some boats." },
+  { name: "Tugboat Wreck Snorkel Charter", cat: "boat", duration: "2–4 hrs", price: "~$50–80", family: "yes", desc: "Direct-to-Tugboat snorkel boat from various operators. The wreck sits in shallow 15-ft water and is the island's iconic snorkel site." },
+  { name: "Blue Room Cave Boat Tour", cat: "boat", duration: "Half day", price: "~$70–90", family: "yes", desc: "Boat tour to the Blue Room — a sea cave on the west coast where light filters through making the water glow electric blue. Snorkel inside the cave. Departs from Santa Cruz." },
+  { name: "Powerboat Tour: Sea Turtles + Blue Room", cat: "boat", duration: "5 hrs", price: "~$185", family: "yes", desc: "Faster powerboat trip combining Playa Piskado (turtles) and the Blue Room cave. Shorter, more adventurous." },
+  { name: "Substation Curaçao Submersible", cat: "boat", duration: "1.5–2 hrs", price: "$1,200+ per dive (4-pax sub)", family: "no", desc: "Personal submarine dive to 1,000 ft along a deep wall reef — completely unique experience. Pricey, advance booking essential." },
+  { name: "Pelican Boat Trips", cat: "boat", duration: "Various", price: "varies", family: "yes", desc: "Established operator running snorkel, sunset, and Blue Room boat trips out of the Mambo / Sea Aquarium area." },
+  { name: "Jet Ski Rental / Tour", cat: "boat", duration: "1–3 hrs", price: "~$120–250", family: "no", desc: "Jet ski rentals from multiple Mambo and Jan Thiel beach operators. Kid age limits apply." },
+  { name: "Stand Up Paddle / Kayak Spanish Water", cat: "boat", duration: "2–3 hrs", price: "~$30–50", family: "yes", desc: "Calm Spanish Water lagoon — perfect for SUPing or kayaking with kids. Multiple rental shops at the marina." },
+  { name: "Tiki Boat Spanish Water (self-drive)", cat: "boat", duration: "2–4 hrs", price: "~$200/boat", family: "yes", desc: "Rent a small floating tiki bar to drive yourself around Spanish Water lagoon. No license needed; instructions provided. Fun for groups." },
+  { name: "Deep Sea Fishing Charter", cat: "boat", duration: "Half/full day", price: "$700–1,500", family: "yes", desc: "Trolling for mahi, wahoo, tuna, marlin in deep water. Multiple operators out of Spanish Water and Caracas Bay." },
+
+  // Land Adventure
+  { name: "ATV Tour West Curaçao (Caves, Flamingos, Beach)", cat: "land", duration: "4–5 hrs", price: "~$145", family: "12+ rec.", desc: "Off-road ATV expedition along the west coast — caves, oceanfront cliffs, flamingo viewing, beach swim stop. Kamran (12) likely OK; Ashton (8) typically as passenger." },
+  { name: "Eric's ATV Adventures", cat: "land", duration: "4 hrs", price: "~$130–160", family: "12+ rec.", desc: "Established small-group ATV operator running west-end adventures including beach stops and the Boka Tabla area." },
+  { name: "Curaçao Buggy Adventures (UTV)", cat: "land", duration: "4 hrs", price: "~$150–200", family: "8+ as passenger", desc: "Side-by-side UTVs with a passenger seat — rugged west-coast trails, hidden caves, beach swim stop, flamingo spotting. Better for younger kids than ATVs." },
+  { name: "Jeep Safari Tour", cat: "land", duration: "Half/full day", price: "~$110–150", family: "yes", desc: "Guided jeep safari into Christoffel Park, north coast, and remote beaches — driver-led, you ride. Family friendly, no age cutoff." },
+  { name: "East Curaçao Highlights Tour", cat: "land", duration: "Half day", price: "~$80", family: "yes", desc: "Sightseeing tour: Queen Juliana Bridge, Boka Tabla, Flamingo area, and other east-side highlights." },
+  { name: "West Beach Hopping Tour", cat: "land", duration: "Full day", price: "~$120", family: "yes", desc: "Driver-guided tour hitting 3–4 west-end beaches — Knip, Cas Abao, Porto Mari, Westpunt. Easy day if you don't want to drive." },
+  { name: "Punda Vibes City Tour", cat: "culture", duration: "3 hrs", price: "~$45", family: "yes", desc: "Cultural walking/driving tour of Willemstad — Punda, Otrobanda, Pietermaai, Queen Emma Bridge, Floating Market." },
+  { name: "Free Walking Tour Curaçao", cat: "culture", duration: "1.5–2 hrs", price: "Tip-based", family: "yes", desc: "Daily free walking tours of Punda starting near Queen Emma Bridge. Tip the guide what you think it's worth." },
+
+  // Wildlife / Animals
+  { name: "Curaçao Sea Aquarium", cat: "wildlife", duration: "2–4 hrs", price: "~$22 adult / kids discounted", family: "yes", desc: "5-min walk from ONE Mambo Beach. Sea lion shows, dolphin shows, nurse shark feeding, stingray encounter, underwater observatory boat, touch tanks. Open daily 8:30 AM – 5:30 PM." },
+  { name: "Dolphin Academy — Encounter", cat: "wildlife", duration: "30 min", price: "~$159", family: "yes (8+)", desc: "Stand on platform in waist-deep water, learn about dolphins, moderate touching/petting. Inside Sea Aquarium complex." },
+  { name: "Dolphin Academy — Swim", cat: "wildlife", duration: "30 min", price: "~$199", family: "yes (8+)", desc: "Swim alongside dolphins, pet them, basic interactions. Both Kamran and Ashton qualify." },
+  { name: "Dolphin Academy — Dorsal Ride", cat: "wildlife", duration: "30 min", price: "~$229", family: "yes (8+)", desc: "Hold onto two dolphins' dorsal fins for a tow ride. The signature dolphin experience." },
+  { name: "Dolphin Academy — Snorkel", cat: "wildlife", duration: "1 hr", price: "~$199", family: "yes (8+)", desc: "Snorkel on a reef with the dolphins in open water. More natural setting than the lagoon." },
+  { name: "Dolphin Academy — Open Water Dive", cat: "wildlife", duration: "1 hr", price: "~$295", family: "12+ certified", desc: "SCUBA dive with dolphins in the open sea — only certified divers. Kamran would need PADI cert." },
+  { name: "Dolphin Assistant Trainer Course", cat: "wildlife", duration: "2 half-days", price: "$299", family: "8–14", desc: "Two-day program for kids 8–14 to learn dolphin training basics. Kamran and Ashton both qualify. Mon–Tue schedule." },
+  { name: "Sharks & Stingrays Snorkel/Dive", cat: "wildlife", duration: "1 hr", price: "~$80–150", family: "yes", desc: "Animal Encounter at the Sea Aquarium — feed nurse sharks, stingrays, and sea turtles in a controlled lagoon." },
+  { name: "Sea Turtle Snorkel at Playa Piskado", cat: "wildlife", duration: "1–2 hrs", price: "Free + gear rental", family: "yes", desc: "DIY: drive to Playa Grandi, rent gear, snorkel with green sea turtles in the bay. Best 8–10 AM." },
+  { name: "Flamingo Spotting at Salt Pans / Sint Willibrordus", cat: "wildlife", duration: "1–2 hrs", price: "Free", family: "yes", desc: "Wild Caribbean flamingos at the salt pans near Sint Willibrordus (Cargill salt flats). Best at sunrise or late afternoon. No facilities." },
+  { name: "Den Paradera Botanic Garden", cat: "wildlife", duration: "1.5 hrs", price: "~$10", family: "yes", desc: "Dinah Veeris's herbal garden featuring native medicinal plants. Guided tours available — quirky cultural-natural stop." },
+  { name: "Ostrich Farm Curaçao", cat: "wildlife", duration: "1.5 hrs", price: "~$25", family: "yes", desc: "Family farm with guided tour — feed ostriches, ride an ostrich (kids), African-themed safari restaurant." },
+
+  // Culture / History
+  { name: "Punda — Queen Emma Pontoon Bridge & Handelskade", cat: "culture", duration: "2–3 hrs", price: "Free", family: "yes", desc: "UNESCO-listed colorful Dutch colonial waterfront. Walk across the floating Queen Emma Bridge (it swings open for ships). Photo gold." },
+  { name: "Mikve Israel-Emanuel Synagogue", cat: "culture", duration: "30 min", price: "~$10", family: "yes", desc: "One of the oldest synagogues in the Americas (1730). Sand floors, beautiful interior. Mon–Fri." },
+  { name: "Kura Hulanda Museum", cat: "culture", duration: "1.5 hrs", price: "~$10", family: "older kids", desc: "Powerful museum on the African slave trade and African heritage in Curaçao. Heavy subject matter — better for older kids." },
+  { name: "Maritime Museum Curaçao", cat: "culture", duration: "1.5 hrs", price: "~$8", family: "yes", desc: "Maritime history of the island, ship models, harbor tours optional add-on." },
+  { name: "Curaçao Liqueur Distillery (Landhuis Chobolobo)", cat: "culture", duration: "30 min", price: "Free", family: "yes", desc: "Tour the distillery making the famous Blue Curaçao liqueur. Free self-guided tour with tastings (kids get juice). Mon–Fri 8 AM–5 PM. In Salina, very close to Mambo." },
+  { name: "Hato Caves", cat: "culture", duration: "1.5 hrs", price: "~$15 adult / $10 child", family: "yes", desc: "Limestone caves north of Willemstad with stalactites, underground pools, ancient Arawak petroglyphs. Guided tours every hour. ~5 km from airport." },
+  { name: "Museum Kas di Pal'i Maishi", cat: "culture", duration: "45 min", price: "Free", family: "yes", desc: "Traditional cunucu (countryside) house museum showing Curaçaoan rural life. Quick stop on west-end drives." },
+  { name: "Fort Beekenburg / Caracas Bay", cat: "culture", duration: "1 hr", price: "Free", family: "yes", desc: "17th-century circular fort overlooking Caracas Bay. Climb to the top for views. Combines well with Tugboat snorkel." },
+  { name: "Fort Amsterdam (Punda)", cat: "culture", duration: "30 min", price: "Free", family: "yes", desc: "17th-century fort housing the Governor's residence and offices. Cannonball still embedded in church wall from 1804 American attack." },
+  { name: "Riffort Otrobanda", cat: "culture", duration: "1–2 hrs", price: "Free", family: "yes", desc: "Restored 19th-century fort now hosting restaurants, shops, casino. Walk over Queen Emma Bridge from Punda." },
+  { name: "Floating Market (Punda)", cat: "culture", duration: "30 min", price: "Free", family: "yes", desc: "Working market where Venezuelan fishing boats dock and sell fresh produce/seafood. Atmospheric; best mornings." },
+
+  // Active / Adventure
+  { name: "Christoffel National Park — Hike Mt. Christoffel", cat: "active", duration: "3–4 hrs", price: "~$15 entry", family: "older kids", desc: "Hike to Curaçao's highest point (372m). Steep, hot — start at 6 AM. Reward: 360° island view. 8 trails total in the park; shorter family-friendly options exist." },
+  { name: "Christoffel Park — Easier Trails / Drive", cat: "active", duration: "2–3 hrs", price: "~$15 entry", family: "yes", desc: "Self-drive 20-km loop or shorter hikes (Boca Grandi, Savonet plantation, orchid forest). Great for spotting native white-tailed deer, lizards, birds." },
+  { name: "Shete Boka National Park", cat: "active", duration: "2 hrs", price: "~$10 entry", family: "yes", desc: "Wild north-coast park with dramatic blowholes (Boka Tabla, Boka Pistol, Boka Wandomi). Walking trails along sea cliffs. No swimming. Combine with Christoffel." },
+  { name: "Snorkel safari (multi-stop)", cat: "active", duration: "Half day", price: "~$80–110", family: "yes", desc: "Driver-guide takes you to 3–4 of the best shore snorkel spots (Playa Lagun, Tugboat, Director's Bay, etc.) — better than DIY for first-timers." },
+  { name: "Shore SCUBA Diving", cat: "active", duration: "Half day", price: "~$80–120 / 2-tank", family: "12+ cert.", desc: "Curaçao has 65+ shore dive sites. Major operators: Ocean Encounters (Mambo), Dive Bus, Twin Divers. Kamran could do Discover Scuba (introductory)." },
+  { name: "Discover Scuba (intro dive)", cat: "active", duration: "3 hrs", price: "~$130", family: "10+", desc: "PADI Discover Scuba — pool training + shallow open-water dive. Both kids could potentially try (Ashton borderline at 8)." },
+  { name: "Sea Trek Curaçao", cat: "active", duration: "1.5 hrs", price: "~$95", family: "8+", desc: "Walk on the sea floor wearing a helmet — air supplied from above. Easier than scuba, no swim skill needed. At the Sea Aquarium." },
+  { name: "Kitesurfing — St. Joris Bay", cat: "active", duration: "Half day", price: "$80–250", family: "12+", desc: "Constant trade winds make St. Joris Bay a world-class kite spot. Lessons available. Lookers' beach: Kanoa." },
+  { name: "Windsurfing", cat: "active", duration: "1–4 hrs", price: "~$50–120", family: "10+", desc: "Spanish Water lagoon for beginners; St. Joris for experts. Multiple rental shops." },
+  { name: "Stand Up Paddle Yoga", cat: "active", duration: "1.5 hrs", price: "~$45", family: "older kids", desc: "Sunrise SUP yoga sessions on calm bays — multiple operators." },
+  { name: "Horseback Riding — Rancho Alegre", cat: "active", duration: "2 hrs", price: "~$75", family: "8+", desc: "Trail rides through countryside ending at the beach. Several ranches operate." },
+  { name: "Mountain Biking", cat: "active", duration: "Half day", price: "~$60–90", family: "12+", desc: "Guided MTB tours through the Christoffel area or coastal trails." },
+  { name: "Curaçao Golf at Old Quarry / Blue Bay", cat: "active", duration: "5 hrs", price: "$150–250 + cart", family: "12+", desc: "Two championship courses: Old Quarry (Pete Dye design at Santa Barbara Resort) and Blue Bay. Both spectacular ocean views — Ali should bring clubs." },
+  { name: "Mini Golf at Sambil / Casino areas", cat: "active", duration: "1 hr", price: "~$15", family: "yes", desc: "Family mini golf options near major shopping/casino areas — easy quick activity for the boys." },
+  { name: "Bowling Curaçao", cat: "active", duration: "1.5 hrs", price: "~$25/lane", family: "yes", desc: "Modern bowling alley near Salina — rainy-evening backup option." },
+  { name: "Movie Theater Caribbean Cinemas", cat: "active", duration: "2 hrs", price: "~$10", family: "yes", desc: "Modern cineplex at Sambil Mall — first-run movies in English with subtitles. Great rainy-evening kid backup." },
+
+  // Family-specific (the entire trip is family but a few extras)
+  { name: "Curaçao Sea Aquarium Family Day Pass", cat: "family", duration: "Full day", price: "~$22 adult", family: "yes", desc: "Combine the aquarium, sea lion show, dolphin show, and underwater observatory into a full day. The most-walking-distance kid attraction." },
+  { name: "Adventure Park / Trampoline Park", cat: "family", duration: "2 hrs", price: "~$15–20", family: "yes", desc: "Indoor trampoline park near Salina — great rainy-day kid wind-down." },
+  { name: "Resort Day Pass — Sunscape (next door)", cat: "family", duration: "Full day", price: "~$120/adult", family: "yes", desc: "Adjacent to Mambo. All-inclusive day pass: unlimited food, drinks, pool, beach, kids' Explorer's Club. Easy walk-over from ONE Mambo." },
+  { name: "Mambo Beach Boulevard Shopping & Arcade", cat: "family", duration: "1–2 hrs", price: "Free", family: "yes", desc: "The boardwalk has shops, ice cream, gelato, beach gear stores, an arcade — easy after-dinner stroll for the boys." },
+  { name: "Glass Bottom Boat", cat: "family", duration: "1 hr", price: "~$30", family: "yes", desc: "Casual glass-bottom-boat tours from Mambo / Sea Aquarium area — great for non-snorkelers (Ashton if he's hesitant)." },
+  { name: "Sambil Mall Curaçao", cat: "family", duration: "2–3 hrs", price: "Free", family: "yes", desc: "Largest mall on the island — anchored cinema, food court, arcade, ice rink (yes, ice rink), Sunday family events. Salina area, ~10 min from Mambo." },
+  { name: "Curaçao Carnival (timing dependent)", cat: "family", duration: "Varies", price: "Free", family: "yes", desc: "Curaçao's carnival runs Jan–March; June timing means parades won't be active, but cultural performances happen year-round at venues like Curaçao Festival Center." },
+];
+
+/* ============================================================
+   TRIP DAYS
+============================================================ */
+const TRIP_DAYS = [
+  { id: 'd0', label: 'Travel Day', date: '2026-06-05', short: 'Fri Jun 5', full: 'Friday, June 5', note: 'Depart home → overnight flight' },
+  { id: 'd1', label: 'Arrival', date: '2026-06-06', short: 'Sat Jun 6', full: 'Saturday, June 6', note: 'Land 12:30 PM · Check in · Settle' },
+  { id: 'd2', label: 'Day 2', date: '2026-06-07', short: 'Sun Jun 7', full: 'Sunday, June 7' },
+  { id: 'd3', label: 'Day 3', date: '2026-06-08', short: 'Mon Jun 8', full: 'Monday, June 8' },
+  { id: 'd4', label: 'Day 4', date: '2026-06-09', short: 'Tue Jun 9', full: 'Tuesday, June 9' },
+  { id: 'd5', label: 'Day 5', date: '2026-06-10', short: 'Wed Jun 10', full: 'Wednesday, June 10' },
+  { id: 'd6', label: 'Day 6', date: '2026-06-11', short: 'Thu Jun 11', full: 'Thursday, June 11' },
+  { id: 'd7', label: 'Day 7', date: '2026-06-12', short: 'Fri Jun 12', full: 'Friday, June 12' },
+  { id: 'd8', label: 'Day 8', date: '2026-06-13', short: 'Sat Jun 13', full: 'Saturday, June 13' },
+  { id: 'd9', label: 'Departure', date: '2026-06-14', short: 'Sun Jun 14', full: 'Sunday, June 14', note: 'Depart 1:23 PM' },
+];
+
+/* ============================================================
+   STATE & STORAGE
+============================================================ */
+const STORAGE_KEY = 'curacao2026_itinerary';
+let itinerary = {};
+TRIP_DAYS.forEach(d => itinerary[d.id] = []);
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    Object.keys(parsed).forEach(k => { if (itinerary[k]) itinerary[k] = parsed[k]; });
+  }
+} catch (e) { /* ignore */ }
+
+function saveItin() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(itinerary)); }
+  catch (e) { console.warn('Storage failed:', e); }
+}
+
+/* ============================================================
+   COUNTDOWN
+============================================================ */
+(function updateCountdown() {
+  const tripStart = new Date('2026-06-05T00:00:00-08:00'); // Pacific
+  const now = new Date();
+  const days = Math.ceil((tripStart - now) / (1000*60*60*24));
+  document.getElementById('countdown').textContent = days > 0 ? days : (days === 0 ? '0' : 'NOW');
+})();
+
+/* ============================================================
+   TAB NAVIGATION
+============================================================ */
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+/* ============================================================
+   COUNTS
+============================================================ */
+document.getElementById('ct-beaches').textContent = `${BEACHES.length}`;
+document.getElementById('ct-restaurants').textContent = `${RESTAURANTS.length}`;
+document.getElementById('ct-excursions').textContent = `${EXCURSIONS.length}`;
+
+/* ============================================================
+   RENDER: BEACHES
+============================================================ */
+const REGION_LABELS = {
+  'mambo-area': 'Mambo Area',
+  'willemstad': 'Willemstad',
+  'south-east': 'SE / Spanish Water',
+  'south-west': 'SW Coast',
+  'west-end': 'Westpunt',
+  'north': 'North Coast',
+  'offshore': 'Offshore',
+};
+
+let beachFilters = { region: 'all', tag: null, search: '' };
+
+function renderBeaches() {
+  const grid = document.getElementById('beaches-grid');
+  const filtered = BEACHES.filter(b => {
+    if (beachFilters.region !== 'all' && b.region !== beachFilters.region) return false;
+    if (beachFilters.tag && !b.tags.includes(beachFilters.tag)) return false;
+    if (beachFilters.search) {
+      const s = beachFilters.search.toLowerCase();
+      if (!b.name.toLowerCase().includes(s) && !b.desc.toLowerCase().includes(s)) return false;
+    }
+    return true;
+  });
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 40px; opacity:0.6;">No beaches match those filters.</p>';
+    return;
+  }
+  grid.innerHTML = filtered.map((b, i) => `
+    <div class="card">
+      <div class="region">${REGION_LABELS[b.region] || b.region}</div>
+      <h3>${b.name}</h3>
+      <div class="info-row" style="margin-bottom:10px; padding-top:0; border-top:none;">
+        <span>📍 ${b.drive}</span>
+      </div>
+      <p class="desc">${b.desc}</p>
+      <div class="tags">${b.tags.map(t => `<span class="tag ${t}">${t}</span>`).join('')}</div>
+      <div class="card-actions">
+        <button class="btn btn-primary add-btn" data-type="Beach" data-name="${b.name.replace(/"/g,'&quot;')}">+ Add to day</button>
+        <a class="btn" href="https://www.google.com/maps/search/${encodeURIComponent(b.name + ' Curacao')}" target="_blank" rel="noopener">🗺️ Map</a>
+      </div>
+    </div>
+  `).join('');
+  attachAddListeners();
+}
+
+document.getElementById('beach-search').addEventListener('input', e => {
+  beachFilters.search = e.target.value;
+  renderBeaches();
+});
+
+document.querySelectorAll('.filter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const type = chip.dataset.filterType;
+    const value = chip.dataset.filterValue;
+    if (type === 'region') {
+      document.querySelectorAll('.filter-chip[data-filter-type="region"]').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      beachFilters.region = value;
+    } else if (type === 'tag') {
+      if (beachFilters.tag === value) {
+        beachFilters.tag = null;
+        chip.classList.remove('active');
+      } else {
+        document.querySelectorAll('.filter-chip[data-filter-type="tag"]').forEach(c => c.classList.remove('active'));
+        beachFilters.tag = value;
+        chip.classList.add('active');
+      }
+    }
+    renderBeaches();
+  });
+});
+renderBeaches();
+
+/* ============================================================
+   RENDER: RESTAURANTS
+============================================================ */
+const RESTO_REGION_LABELS = {
+  'mambo': 'Mambo Boulevard',
+  'jan-thiel': 'Jan Thiel',
+  'pietermaai': 'Pietermaai',
+  'punda': 'Punda',
+  'otrobanda': 'Otrobanda / Riffort',
+  'salina': 'Salina',
+  'other': 'Other / Around Island',
+};
+
+let restoFilters = { region: 'all', cuisine: null, search: '' };
+
+function renderRestaurants() {
+  const grid = document.getElementById('restaurants-grid');
+  const filtered = RESTAURANTS.filter(r => {
+    if (restoFilters.region !== 'all' && r.region !== restoFilters.region) return false;
+    if (restoFilters.cuisine) {
+      if (restoFilters.cuisine === 'kid') {
+        if (!r.tags.includes('kid')) return false;
+      } else if (!r.cuisine.includes(restoFilters.cuisine)) return false;
+    }
+    if (restoFilters.search) {
+      const s = restoFilters.search.toLowerCase();
+      if (!r.name.toLowerCase().includes(s) && !r.desc.toLowerCase().includes(s) && !r.cuisine.join(' ').toLowerCase().includes(s)) return false;
+    }
+    return true;
+  });
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 40px; opacity:0.6;">No restaurants match those filters.</p>';
+    return;
+  }
+  grid.innerHTML = filtered.map(r => `
+    <div class="card">
+      <div class="region">${RESTO_REGION_LABELS[r.region] || r.region} · ${r.price}</div>
+      <h3>${r.name}</h3>
+      <div class="info-row" style="margin-bottom:10px; padding-top:0; border-top:none;">
+        <span>${r.vibe}</span>
+      </div>
+      <p class="desc">${r.desc}</p>
+      <div class="tags">
+        ${r.cuisine.map(c => `<span class="tag food">${c}</span>`).join('')}
+        ${r.tags.includes('kid') ? '<span class="tag kid">kid-friendly</span>' : ''}
+      </div>
+      <div class="card-actions">
+        <button class="btn btn-primary add-btn" data-type="Restaurant" data-name="${r.name.replace(/"/g,'&quot;')}">+ Add to day</button>
+        <a class="btn" href="https://www.google.com/maps/search/${encodeURIComponent(r.name + ' Curacao')}" target="_blank" rel="noopener">🗺️ Map</a>
+      </div>
+    </div>
+  `).join('');
+  attachAddListeners();
+}
+
+document.getElementById('resto-search').addEventListener('input', e => {
+  restoFilters.search = e.target.value;
+  renderRestaurants();
+});
+
+document.querySelectorAll('.filter-chip-r').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const type = chip.dataset.filterTypeR;
+    const value = chip.dataset.filterValueR;
+    if (type === 'region') {
+      document.querySelectorAll('.filter-chip-r[data-filter-type-r="region"]').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      restoFilters.region = value;
+    } else if (type === 'cuisine') {
+      if (restoFilters.cuisine === value) {
+        restoFilters.cuisine = null;
+        chip.classList.remove('active');
+      } else {
+        document.querySelectorAll('.filter-chip-r[data-filter-type-r="cuisine"]').forEach(c => c.classList.remove('active'));
+        restoFilters.cuisine = value;
+        chip.classList.add('active');
+      }
+    }
+    renderRestaurants();
+  });
+});
+renderRestaurants();
+
+/* ============================================================
+   RENDER: EXCURSIONS
+============================================================ */
+const CAT_LABELS = {
+  'boat': 'Boat / Water',
+  'land': 'Land Adventure',
+  'wildlife': 'Wildlife / Animals',
+  'culture': 'Culture / History',
+  'active': 'Active / Adventure',
+  'family': 'Best for Kids',
+};
+
+let excFilters = { cat: 'all', search: '' };
+
+function renderExcursions() {
+  const grid = document.getElementById('excursions-grid');
+  const filtered = EXCURSIONS.filter(e => {
+    if (excFilters.cat !== 'all' && e.cat !== excFilters.cat) return false;
+    if (excFilters.search) {
+      const s = excFilters.search.toLowerCase();
+      if (!e.name.toLowerCase().includes(s) && !e.desc.toLowerCase().includes(s)) return false;
+    }
+    return true;
+  });
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 40px; opacity:0.6;">No excursions match those filters.</p>';
+    return;
+  }
+  grid.innerHTML = filtered.map(e => `
+    <div class="card">
+      <div class="region">${CAT_LABELS[e.cat] || e.cat}</div>
+      <h3>${e.name}</h3>
+      <div class="info-row" style="margin-bottom:10px; padding-top:0; border-top:none;">
+        <span>⏱️ ${e.duration}</span>
+        <span>💵 ${e.price}</span>
+        <span>👨‍👩‍👦 ${e.family}</span>
+      </div>
+      <p class="desc">${e.desc}</p>
+      <div class="card-actions">
+        <button class="btn btn-primary add-btn" data-type="Excursion" data-name="${e.name.replace(/"/g,'&quot;')}">+ Add to day</button>
+        <a class="btn" href="https://www.google.com/search?q=${encodeURIComponent(e.name + ' Curacao booking')}" target="_blank" rel="noopener">🔎 Book</a>
+      </div>
+    </div>
+  `).join('');
+  attachAddListeners();
+}
+
+document.getElementById('exc-search').addEventListener('input', e => {
+  excFilters.search = e.target.value;
+  renderExcursions();
+});
+
+document.querySelectorAll('.filter-chip-e').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.filter-chip-e').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    excFilters.cat = chip.dataset.filterValueE;
+    renderExcursions();
+  });
+});
+renderExcursions();
+
+/* ============================================================
+   ADD-TO-ITINERARY MODAL
+============================================================ */
+let pendingAdd = null;
+const modalBg = document.getElementById('modal-bg');
+const daySelect = document.getElementById('day-select');
+daySelect.innerHTML = TRIP_DAYS.map(d => `<option value="${d.id}">${d.full}${d.note ? ' — ' + d.note : ''}</option>`).join('');
+
+function attachAddListeners() {
+  document.querySelectorAll('.add-btn').forEach(btn => {
+    btn.onclick = () => {
+      pendingAdd = { type: btn.dataset.type, name: btn.dataset.name };
+      document.getElementById('modal-item-name').textContent = `${pendingAdd.type}: ${pendingAdd.name}`;
+      modalBg.classList.add('show');
+    };
+  });
+}
+
+document.getElementById('modal-cancel').onclick = () => { modalBg.classList.remove('show'); pendingAdd = null; };
+modalBg.onclick = e => { if (e.target === modalBg) { modalBg.classList.remove('show'); pendingAdd = null; }};
+
+document.getElementById('modal-confirm').onclick = () => {
+  if (!pendingAdd) return;
+  const dayId = daySelect.value;
+  itinerary[dayId].push({ type: pendingAdd.type, name: pendingAdd.name, ts: Date.now() });
+  saveItin();
+  renderItinerary();
+  modalBg.classList.remove('show');
+  pendingAdd = null;
+};
+
+/* ============================================================
+   ITINERARY RENDER
+============================================================ */
+function renderItinerary() {
+  const grid = document.getElementById('itinerary-grid');
+  grid.innerHTML = TRIP_DAYS.map(d => {
+    const items = itinerary[d.id] || [];
+    return `
+      <div class="day-col">
+        <h4>${d.label}</h4>
+        <div class="date-line">${d.short}${d.note ? ' · ' + d.note : ''}</div>
+        ${items.length === 0 ? '<div class="empty">— nothing planned —</div>' : items.map((it, idx) => `
+          <div class="itin-item">
+            <button class="remove" data-day="${d.id}" data-idx="${idx}" title="Remove">×</button>
+            <div class="type">${it.type}</div>
+            <div class="name">${it.name}</div>
+            <div class="move-btns">
+              <select class="move-select" data-day="${d.id}" data-idx="${idx}">
+                <option value="">Move to…</option>
+                ${TRIP_DAYS.filter(td => td.id !== d.id).map(td => `<option value="${td.id}">${td.short}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }).join('');
+  document.querySelectorAll('.itin-item .remove').forEach(b => {
+    b.onclick = () => {
+      const d = b.dataset.day, i = parseInt(b.dataset.idx);
+      itinerary[d].splice(i, 1);
+      saveItin();
+      renderItinerary();
+    };
+  });
+  document.querySelectorAll('.move-select').forEach(s => {
+    s.onchange = () => {
+      const fromDay = s.dataset.day, idx = parseInt(s.dataset.idx), toDay = s.value;
+      if (!toDay) return;
+      const item = itinerary[fromDay].splice(idx, 1)[0];
+      itinerary[toDay].push(item);
+      saveItin();
+      renderItinerary();
+    };
+  });
+}
+
+document.getElementById('clear-itin').onclick = () => {
+  if (!confirm('Clear all itinerary items? This cannot be undone.')) return;
+  TRIP_DAYS.forEach(d => itinerary[d.id] = []);
+  saveItin();
+  renderItinerary();
+};
+
+document.getElementById('export-itin').onclick = () => {
+  let txt = 'CURAÇAO 2026 — CHITSAZ FAMILY ITINERARY\n';
+  txt += '=========================================\n\n';
+  TRIP_DAYS.forEach(d => {
+    txt += `${d.full.toUpperCase()}${d.note ? ' (' + d.note + ')' : ''}\n`;
+    txt += '-'.repeat(50) + '\n';
+    const items = itinerary[d.id] || [];
+    if (items.length === 0) {
+      txt += '  (nothing planned)\n';
+    } else {
+      items.forEach(it => txt += `  • [${it.type}] ${it.name}\n`);
+    }
+    txt += '\n';
+  });
+  const blob = new Blob([txt], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'curacao-2026-itinerary.txt';
+  a.click();
+};
+
+document.getElementById('print-itin').onclick = () => window.print();
+
+renderItinerary();
+
+/* ============================================================
+   WEATHER (Open-Meteo, no API key)
+============================================================ */
+const WEATHER_LAT = 12.0834;
+const WEATHER_LON = -68.8939; // Mambo Beach
+
+const WMO_ICONS = {
+  0: { icon: '☀️', desc: 'Clear' },
+  1: { icon: '🌤️', desc: 'Mostly clear' },
+  2: { icon: '⛅', desc: 'Partly cloudy' },
+  3: { icon: '☁️', desc: 'Overcast' },
+  45: { icon: '🌫️', desc: 'Fog' },
+  48: { icon: '🌫️', desc: 'Rime fog' },
+  51: { icon: '🌦️', desc: 'Light drizzle' },
+  53: { icon: '🌦️', desc: 'Drizzle' },
+  55: { icon: '🌧️', desc: 'Heavy drizzle' },
+  61: { icon: '🌦️', desc: 'Light rain' },
+  63: { icon: '🌧️', desc: 'Rain' },
+  65: { icon: '🌧️', desc: 'Heavy rain' },
+  80: { icon: '🌦️', desc: 'Showers' },
+  81: { icon: '🌧️', desc: 'Showers' },
+  82: { icon: '⛈️', desc: 'Heavy showers' },
+  95: { icon: '⛈️', desc: 'Thunderstorm' },
+  96: { icon: '⛈️', desc: 'Thunder + hail' },
+  99: { icon: '⛈️', desc: 'Severe storm' },
+};
+
+function getIconAndDesc(code) {
+  return WMO_ICONS[code] || { icon: '🌤️', desc: '—' };
+}
+
+function fmtDate(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+}
+function fmtDay(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return d.getDate();
+}
+
+async function loadWeather() {
+  const status = document.getElementById('weather-status');
+  const text = document.getElementById('weather-status-text');
+  const grid = document.getElementById('weather-grid');
+  const calGrid = document.getElementById('trip-calendar');
+
+  // Fall-back climatological data for June 2026 (used if API fails)
+  const FALLBACK = TRIP_DAYS.map(d => ({
+    date: d.date,
+    tmax: 89, tmin: 81,
+    code: 2,
+    precip: 0.1,
+    pop: 35,
+    wind: 16,
+    uv: 11,
+    fallback: true
+  }));
+
+  function renderWeatherCards(days) {
+    const cards = days.map(day => {
+      const meta = TRIP_DAYS.find(d => d.date === day.date);
+      const isTravel = meta && (meta.id === 'd0' || meta.id === 'd1' || meta.id === 'd9');
+      const { icon, desc } = getIconAndDesc(day.code);
+      return `
+        <div class="wcard ${isTravel ? 'travel' : ''}">
+          <div class="day">${fmtDate(day.date)}${meta ? ' · ' + meta.label : ''}</div>
+          <div class="date">${fmtDay(day.date)}</div>
+          <div class="icon">${icon}</div>
+          <div class="temp">${Math.round(day.tmax)}°<small>/${Math.round(day.tmin)}°</small></div>
+          <div class="precip">💧 ${Math.round(day.pop)}% · ${day.precip.toFixed(2)}"</div>
+          <div class="wind">💨 ${Math.round(day.wind)} mph${day.uv ? ' · UV ' + Math.round(day.uv) : ''}</div>
+        </div>
+      `;
+    }).join('');
+    grid.innerHTML = cards;
+    calGrid.innerHTML = cards;
+  }
+
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${WEATHER_LAT}&longitude=${WEATHER_LON}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,uv_index_max&timezone=America%2FCuracao&start_date=2026-06-05&end_date=2026-06-14&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (!data.daily || !data.daily.time || data.daily.time.length === 0) throw new Error('Empty forecast');
+
+    const days = data.daily.time.map((d, i) => ({
+      date: d,
+      tmax: data.daily.temperature_2m_max[i],
+      tmin: data.daily.temperature_2m_min[i],
+      code: data.daily.weather_code[i],
+      precip: data.daily.precipitation_sum[i] || 0,
+      pop: data.daily.precipitation_probability_max[i] || 0,
+      wind: data.daily.wind_speed_10m_max[i] || 0,
+      uv: data.daily.uv_index_max[i] || 0,
+    }));
+
+    // If forecast didn't reach the trip, fill remaining with climatology
+    const filled = TRIP_DAYS.map(td => {
+      const f = days.find(d => d.date === td.date);
+      if (f) return f;
+      const cl = FALLBACK.find(d => d.date === td.date);
+      return { ...cl, fallback: true };
+    });
+
+    const anyFallback = filled.some(d => d.fallback);
+    status.classList.add('live');
+    text.textContent = anyFallback
+      ? `Live forecast loaded — days beyond Open-Meteo's 16-day window use June climatology · Updated ${new Date().toLocaleString()}`
+      : `Live forecast loaded · Updated ${new Date().toLocaleString()}`;
+    renderWeatherCards(filled);
+  } catch (err) {
+    console.warn('Weather fetch failed:', err);
+    status.classList.add('error');
+    text.textContent = `Live forecast unavailable (${err.message}) — showing June climate averages instead`;
+    renderWeatherCards(FALLBACK);
+  }
+}
+
+loadWeather();
+
+</script>
+
+</body>
+</html>
