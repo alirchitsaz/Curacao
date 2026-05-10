@@ -226,6 +226,7 @@ footer a{color:var(--sun);text-decoration:none}
     <button class="tab active" data-tab="overview">Overview</button>
     <button class="tab" data-tab="checklist">Pre-Trip</button>
     <button class="tab" data-tab="suggested">Suggested Plan</button>
+    <button class="tab" data-tab="budget">💰 Budget</button>
     <button class="tab anniversary" data-tab="anniversary">💕 Anniversary</button>
     <button class="tab" data-tab="briefing">Daily Briefing</button>
     <button class="tab" data-tab="itinerary">My Itinerary</button>
@@ -310,6 +311,7 @@ const RESTAURANTS=[
 {name:"Zanzibar Beach Restaurant",region:"jan-thiel",price:"$$$",cuisine:["international","kid"],tags:["kid"],desc:"Flagship Jan Thiel beach club & restaurant. Full beach service, lounge beds, Mediterranean-leaning menu. Live music many nights.",bestTime:"Lunch · Sunset",timeWhy:"Lounge all day; sunset transitions to social.",src:"https://www.zanzibar-curacao.com/",srcL:"Zanzibar"},
 {name:"Zest Mediterranean",region:"jan-thiel",price:"$$$",cuisine:["mediterranean","seafood"],tags:["romance"],desc:"Casually upscale Mediterranean at Jan Thiel. Coastal Italian/Greek touches, strong wine list, ocean view tables.",bestTime:"Sunset dinner",timeWhy:"Pretty sunset deck without the Mambo crowds.",src:"https://www.zestcuracao.com/",srcL:"Zest"},
 {name:"Saint Tropez Ocean Club",region:"jan-thiel",price:"$$$$",cuisine:["french","mediterranean"],tags:["romance"],desc:"South of France-inspired beach club. Day beds, premium service, French-Med menu. Pricey but the prettiest beach club on the island.",bestTime:"Lunch · Sunset",timeWhy:"All-day club; date-night feel after 6 PM.",src:"https://www.sttropez.com/curacao/",srcL:"St Tropez Curaçao"},
+{name:"Mar & Tierra 91 (Pietermaai)",region:"pietermaai",price:"$$$",cuisine:["seafood","steak","international"],tags:["romance","kid"],desc:"⭐ Your anniversary pick. Chic Pietermaai restaurant at #91 — octopus carpaccio, premium steak cuts, creative cocktails, attentive service (Sebastian, Yohana, Adriana, Alex at the bar all named in reviews). Outdoor seating + live music. Family-friendly though leaning special-occasion. Walkable to the Pietermaai seawall for the sunset moment.",bestTime:"7 PM after sunset walk",timeWhy:"Pietermaai is photogenic in golden hour — walk it 5:45 PM before dinner.",src:"https://www.opentable.com/r/mar-y-tierra-91-willemstad",srcL:"OpenTable"},
 {name:"Mundo Bizarro",region:"pietermaai",price:"$$",cuisine:["cuban","latin"],tags:["romance"],desc:"Pietermaai institution — Havana-style bar/restaurant. Live music nightly. Cuban-Caribbean menu, ropa vieja, plantains, cocktails.",bestTime:"Dinner 7:30+ · Live music",timeWhy:"Live bands start ~9 PM; bar pre-dinner is great.",src:"https://www.mundobizarrocuracao.com/",srcL:"Mundo Bizarro"},
 {name:"Saint Germain Bistro",region:"pietermaai",price:"$$$",cuisine:["french","romance"],tags:["romance"],desc:"Tiny intimate French bistro on Pietermaai's restored colonial street. Classic French technique, weekly-changing menu. ~20 seats.",bestTime:"Dinner 7 PM",timeWhy:"Reserve well ahead — it's small.",src:"https://www.tripadvisor.com/Restaurants-g147278-Willemstad_Curacao.html",srcL:"Tripadvisor"},
 {name:"BIJ Blauw",region:"pietermaai",price:"$$$",cuisine:["seafood","international"],tags:["romance"],desc:"Oceanfront restaurant in a Pietermaai boutique hotel. Toes-in-water tables, fresh seafood, Med-leaning. Daily happy hour 3-5 PM.",bestTime:"Sunset dinner · Happy hour 3-5",timeWhy:"Direct sunset water view; happy hour is the local secret.",src:"https://www.bijblauw.com/",srcL:"BijBlauw"},
@@ -328,6 +330,7 @@ const RESTAURANTS=[
 ];
 
 const EXCURSIONS=[
+{name:"Curacao Buggy Adventure (UTV) — your pick",cat:"active",duration:"2.5 hr",price:"~$400-450 total (2 UTVs)",desc:"⭐ The UTV operator that allows Ashton (8). Across from Sunscape Resort, ~10 min drive from your hotel. Can-Am Maverick 2-seater side-by-side buggies — roof, seatbelts, automatic. North-coast tour: St Joris sandy plains, cave of doom, crashing waves of the blowhole. Three daily slots: 9:30 AM, 12:30 PM, 3:30 PM. ⚠️ Driver must be 18+, passengers from age 4. 200 kg / 440 lb max per UTV.",bestDay:"9:30 AM slot — heat lower, dust easier",timeWhy:"Morning is cooler & lower wind/dust. Call ahead to confirm Ashton specifically (their site says 4+ but verify weight/height).",tags:["kid","family","active"],src:"https://curacaobuggyadventure.com/",srcL:"Curacao Buggy Adventure"},
 {name:"BlueFinn Klein Curaçao",cat:"boat",duration:"7:30 AM – 5:30 PM",price:"$155 ad/$80 kid",desc:"Largest catamaran operator to Klein Curaçao. Departs Mambo Beach Boulevard Mondays, Wednesdays, Saturdays. Full breakfast, BBQ lunch, open bar, snorkel gear. ~1.5 hr each way.",bestDay:"Monday (Mambo departure · cruise-free)",timeWhy:"Mambo departure means no extra drive. Mondays best for you.",tags:["kid","romance"],src:"https://bluefinncharters.com/klein-curacao/",srcL:"BlueFinn"},
 {name:"Miss Ann Boat Trips",cat:"boat",duration:"7 AM – 5 PM",price:"$160 ad/$80 kid",desc:"Long-established family operator. Steel-hulled catamaran. Departs Caracasbaai. Tuesday-Friday-Sunday slots typically. Open bar, BBQ, snorkel.",bestDay:"Tue, Fri, Sun",timeWhy:"Alternative if BlueFinn Monday is sold out.",tags:["kid","romance"],src:"https://www.missannboattrips.com/",srcL:"Miss Ann"},
 {name:"Maxie Sailing private charter",cat:"romance",duration:"4 hr (sunset slot)",price:"~$300-500 sunset · $150 pp min",desc:"Norbert & Hilde's private 48-ft sailing yacht Galaxie. Just the two of you (or family) — no other guests. Champagne welcome, snorkel stop optional, sunset cruise. Travelers' Choice award winner.",bestDay:"Anniversary sunset",timeWhy:"Pickup typically Caracasbaai. Book 3-4 weeks out.",tags:["romance"],src:"https://www.maxiesailing.com/",srcL:"Maxie Sailing"},
@@ -358,16 +361,14 @@ const EXCURSIONS=[
 
 const CHECKLIST=[
 {phase:"now",title:"NOW — 4+ weeks out",tag:"Lock things that sell out",items:[
-{l:"Book anniversary dinner (Baoase gazebo, Brass Boer, or Fort Nassau sunset)",w:"Sunset slots sell out — Fort Nassau especially.",link:"https://www.fortnassau.com/"},
-{l:"Book Maxie Sailing private charter if doing Route A",w:"Only one yacht — single booking per slot.",link:"https://www.maxiesailing.com/"},
-{l:"Book BlueFinn Klein Curaçao (Mon Jun 8) or Miss Ann (Tue Jun 9 / Fri Jun 12)",w:"Boats fill especially on Mondays in season.",link:"https://bluefinncharters.com/klein-curacao/"},
-{l:"Book Dolphin Academy slot (any morning except Wed/Thu)",w:"Slots get booked; avoid cruise mornings.",link:"https://dolphin-academy.com/"},
-{l:"Reserve rental car (Avis/Hertz at CUR)",w:"Rates climb closer to travel; pickup at airport.",link:"https://www.avis.com/"},
+{l:"Confirm Mar & Tierra 91 anniversary reservation (already booked)",w:"You have it — just confirm time and party size.",link:"https://www.opentable.com/r/mar-y-tierra-91-willemstad"},
+{l:"Call Curacao Buggy Adventure — confirm 2 UTVs + Ashton (8) as passenger",w:"Their site says 4+, but verify weight/height for him.",link:"https://curacaobuggyadventure.com/"},
+{l:"Reserve rental car (Avis/Hertz at CUR)",w:"You've already paid — just confirm pickup time matches landing.",link:"https://www.avis.com/"},
 {l:"Confirm passports valid 6 months past travel date",w:"Renewal takes weeks if expired."}
 ]},
 {phase:"weeks",title:"2-3 weeks out",tag:"Logistics",items:[
 {l:"Fill out the Curaçao DI Card (electronic immigration form)",w:"Required for entry. Valid 1-7 days before arrival. Free.",link:"https://dicardcuracao.com/"},
-{l:"Confirm anniversary sitter / Cana Kids of Curaçao",w:"Hotel concierge can arrange. Anniversary evening cover."},
+{l:"Pick up small bottle of sparkling wine at Vreugdenhil for anniversary seawall moment",w:"Bring 2 plastic cups in cool bag. ~$25.",link:"https://www.vreugdenhilcuracao.com/"},
 {l:"Pre-pay parking fees for paid beaches (or just carry small USD)",w:"Cas Abao, Knip lot, Porto Mari, Jan Thiel all charge."},
 {l:"Decide on Restaurant Week — check 2026 dates",w:"Curaçao Restaurant Week typically in June. Many spots offer 3-course prix-fixe.",link:"https://www.curacaorestaurantweek.com/"},
 {l:"Buy DEET 50% or Picaridin in advance",w:"Dengue is currently active. Don't rely on hotel shop."},
@@ -412,17 +413,16 @@ const BRIEFING=[
 {t:"7:30 PM",text:"<strong>Dinner at Madero (Sunday brunch overflow) or El Grill Mexicano</strong>",d:"Both kid-friendly."}
 ],pack:"DEET reapplied · water bottles full · sunscreen reapply every 90 min"},
 
-{day:"d3",title:"Monday, June 8 · Klein Curaçao",tags:[],lead:"<strong>The big day.</strong> BlueFinn catamaran departs from Mambo Beach Boulevard at 7:30 AM. Uninhabited island, pink lighthouse, shipwrecks, sea turtle snorkeling, BBQ lunch on the sand. Plan tomorrow as a recovery day.",timeline:[
-{t:"6:30 AM",text:"<strong>Big breakfast at home + DEET</strong>",d:"You'll be on the boat 10 hours."},
-{t:"7:15 AM",text:"<strong>Walk to BlueFinn departure dock at Mambo</strong>",d:"Bring towels, water shoes, GoPro, hats.",peak:true},
-{t:"7:30 AM",text:"<strong>Catamaran departs</strong>",d:"1.5 hr each way. Breakfast served onboard."},
-{t:"9:30 AM",text:"<strong>Arrive Klein Curaçao</strong>",d:"Sand, lighthouse, shipwrecks. Boys will lose their minds.",peak:true},
-{t:"12:00 PM",text:"<strong>BBQ lunch on the beach</strong>",d:"Open bar included."},
-{t:"2:00 PM",text:"<strong>Sea turtle snorkel safari</strong>",d:"Boat moves to turtle area. Calm, supervised.",peak:true},
-{t:"3:30 PM",text:"<strong>Departure back</strong>",d:"Often rowdy on the way home. Kids may sleep."},
-{t:"5:00 PM",text:"<strong>Back at Mambo dock</strong>",d:"Quick rinse, then dinner."},
-{t:"7:00 PM",text:"<strong>Easy dinner on Mambo Boulevard</strong>",d:"You'll be wrecked. Pizza Mare or grab takeout."}
-],pack:"Motion sickness pills before boarding · waterproof sunscreen · towel each · GoPro + spare battery · long-sleeve UV shirt for kids"},
+{day:"d3",title:"Monday, June 8 · UTV adventure morning",tags:[],lead:"<strong>The big adventure day — and the single biggest spend besides the anniversary.</strong> 9:30 AM Curacao Buggy Adventure slot, ~$425 for 2 vehicles (one for you+Kamran, one for Kristen+Ashton). 2.5 hr north-coast tour: St Joris plains, cave of doom, crashing waves. Back by 1 PM. Mambo afternoon, easy at-home dinner.",timeline:[
+{t:"7:30 AM",text:"<strong>Breakfast at home, gear up</strong>",d:"Bandanas/scarves to cover mouths (it's dusty). Closed-toe shoes. Sunglasses or the goggles they provide. Long pants if you have them."},
+{t:"8:45 AM",text:"<strong>Drive to Curacao Buggy Adventure</strong>",d:"Across from Sunscape Resort, ~10 min. Arrive 9:15 to sign in."},
+{t:"9:30 AM",text:"<strong>UTV briefing + departure</strong>",d:"Safety briefing, vehicle demo. They provide goggles + water + bandana ($5).",peak:true},
+{t:"10:00 AM",text:"<strong>North coast UTV tour</strong>",d:"Can-Am Maverick 2-seaters with seatbelts. St Joris sandy plains, natural bridge formations, crashing waves on the wild north shore.",peak:true},
+{t:"12:00 PM",text:"<strong>Tour ends · back to your car</strong>",d:"Everyone covered in dust. Memorable."},
+{t:"12:30 PM",text:"<strong>Quick takeout lunch back at Mambo</strong>",d:"Donerix wraps or Bonita Cafetaria. Shower off."},
+{t:"2:00 PM",text:"<strong>Mambo Beach afternoon · pool</strong>",d:"Easy day after the UTV adrenaline."},
+{t:"7:00 PM",text:"<strong>At-home dinner — recovery night</strong>",d:"Pasta from groceries. Save dinner-out money for later in the week."}
+],pack:"Bandana × 4 (mouths) · goggles or sunglasses · closed-toe shoes · long pants if possible · driver's license (you AND Kristen) · cash for bandana purchase if needed · sunscreen · water bottles for the ride"},
 
 {day:"d4",title:"Tuesday, June 9 · Westpunt sea turtles + Knip",tags:[],lead:"Cruise-free day. Westpunt drive — leave by 7 AM to be at Piskado before crowds. Sea turtles at 8:30, Knip Beach by 10, Jaanchies for lunch, home by 3. Cruise day tomorrow so today is the best west-end opportunity.",timeline:[
 {t:"6:30 AM",text:"<strong>Breakfast + load car</strong>",d:"Coolers with sandwiches, water, snacks. Sun stuff."},
@@ -447,16 +447,19 @@ const BRIEFING=[
 {t:"9:30 PM",text:"<strong>Optional: late drink at Mundo Bizarro</strong>",d:"Pietermaai. Live music typically Wed."}
 ],pack:"DEET · water bottles · cash for parking at Dolphin Academy",warn:"<strong>⚓ Cruise day:</strong> Grandeur of the Seas 8 AM – 6 PM (~1,950 pax). Avoid Punda morning, Knip, Cas Abao, Sea Aquarium until afternoon."},
 
-{day:"d6",title:"💕 Thursday, June 11 · Anniversary",tags:["anniv","cruise"],lead:"<strong>Your anniversary AND a cruise day.</strong> Carnival Horizon (~3,974 pax) in port 8 AM – 5 PM. But — ship leaves at 5 PM, and Punda Vibes starts at 6 PM with fireworks at 8:15. So mornings: stay outside Punda. Evenings: Punda is yours again. See Anniversary tab for full Route A or Route B.",timeline:[
-{t:"9:00 AM",text:"<strong>Slow family breakfast at home</strong>",d:"No alarm. No rushing.",peak:true},
-{t:"10:30 AM",text:"<strong>Mambo Beach morning together</strong>",d:"Family time. Cruise crowd doesn't really hit Mambo."},
-{t:"12:30 PM",text:"<strong>Lunch on the boardwalk</strong>",d:"Bonita or Pizza Mare."},
-{t:"2:30 PM",text:"<strong>Quiet hour — kids on screens, you both pack for tonight</strong>",d:"Confirm sitter. Outfit check."},
-{t:"4:00 PM",text:"<strong>SITTER ARRIVES · you two leave</strong>",d:"See Anniversary tab Route A or Route B for details.",peak:true},
-{t:"6:48 PM",text:"<strong>SUNSET</strong>",d:"Whatever you're doing — be still for 10 minutes.",peak:true},
-{t:"8:00 PM",text:"<strong>Dinner at Baoase / Fort Nassau / Brass Boer</strong>",d:"Reservation in place from 4 weeks out."},
-{t:"10:30 PM",text:"<strong>Home to the boys</strong>",d:"Sitter has them sleeping."}
-],pack:"Outfit upgrade · DEET on (even fancy nights) · cash for sitter tip · phone charged for photos · reservation confirmation",warn:"<strong>⚓ Cruise + 💕 Anniversary:</strong> Carnival Horizon 8 AM – 5 PM (~3,974 pax). Daytime: stay outside Punda. Evening: Punda Vibes 6-10 PM with fireworks at 8:15 PM (cruise has departed)."},
+{day:"d6",title:"💕 Thursday, June 11 · Anniversary",tags:["anniv","cruise"],lead:"<strong>Your anniversary AND a cruise day.</strong> Family day, no sitter — but a real anniversary moment at the Pietermaai seawall before dinner at Mar & Tierra 91 (reservation booked). Carnival Horizon (~3,974 pax) in port 8 AM – 5 PM; by your 5:30 PM Pietermaai arrival the cruise crowd is gone.",timeline:[
+{t:"9:00 AM",text:"<strong>Slow family breakfast at home</strong>",d:"No alarm. Coffee on the balcony. This is the start.",peak:true},
+{t:"10:30 AM",text:"<strong>Mambo Beach morning together</strong>",d:"Family time. Cruise crowd doesn't really hit Mambo proper."},
+{t:"12:30 PM",text:"<strong>Lunch on the boardwalk</strong>",d:"Bonita Beach Club — light, casual."},
+{t:"2:30 PM",text:"<strong>Quiet hour — kids screens, you both rest</strong>",d:"Heat peak. Cool down."},
+{t:"4:30 PM",text:"<strong>Shower + dress up just a little</strong>",d:"Kids in clean clothes. Tuck sparkling wine in a cool bag with 2 plastic cups."},
+{t:"5:30 PM",text:"<strong>Drive to Pietermaai</strong>",d:"~10 min. Cruise day-trippers gone."},
+{t:"5:45 PM",text:"<strong>Pietermaai walk as a family</strong>",d:"Colonial street in golden hour. Photos, murals, the painted facades."},
+{t:"6:30 PM",text:"<strong>SEAWALL MOMENT — pop the bottle</strong>",d:"15-min toast with Kristen. Boys play nearby. The photo you'll keep.",peak:true},
+{t:"6:48 PM",text:"<strong>SUNSET</strong>",d:"Be still.",peak:true},
+{t:"7:00 PM",text:"<strong>Mar & Tierra 91 — reservation</strong>",d:"Octopus carpaccio to share, premium steak, ceviche. ~$280 for 4.",peak:true},
+{t:"9:00 PM",text:"<strong>Slow walk to car · home</strong>",d:"Optional Mundo Bizarro drink if energy. ~10 min home."}
+],pack:"Small bottle of sparkling wine + 2 plastic cups · cool bag w/ ice pack · DEET (Pietermaai light) · phone fully charged · light cover-up · reservation confirmation on phone",warn:"<strong>⚓ Cruise + 💕 Anniversary:</strong> Carnival Horizon 8 AM – 5 PM (~3,974 pax). Daytime: avoid Punda. Evening: Pietermaai clears by 5 PM."},
 
 {day:"d7",title:"Friday, June 12 · Cas Abao + Hofi Cas Cora",tags:[],lead:"Cruise-free. Today's the day for Cas Abao — south coast's prettiest beach. Lunch at the on-beach restaurant. Drive home for afternoon rest, then Hofi Cas Cora farm-to-table dinner (one of only 3 nights/week they're open).",timeline:[
 {t:"7:30 AM",text:"<strong>Breakfast at home, gear up</strong>",d:""},
@@ -491,54 +494,109 @@ const BRIEFING=[
 ];
 
 const SUGGESTED_PLAN={
-"d1":{summary:"Arrival day. Vreugdenhil grocery stop, settle in at ONE Mambo, low-key dinner.",items:[
+"d1":{summary:"Arrival. Vreugdenhil grocery run en route, settle in, low-key first dinner on the boulevard. Budget ~$80 (grocery $50, dinner $130 split as treat or get takeout $50).",items:[
 {slot:"afternoon",type:"logistics",name:"Vreugdenhil grocery run + check in"},
 {slot:"afternoon",type:"beach",name:"Mambo Beach"},
 {slot:"evening",type:"resto",name:"Bonita Beach Club"}
 ]},
-"d2":{summary:"Easy snorkel day staying close to home. Sea Aquarium morning, Mambo afternoon.",items:[
+"d2":{summary:"Easy day close to home. Sea Aquarium walk-through ($84 family), Mambo afternoon. Takeout dinner at home — Pizza Mare or Donerix wraps ~$40-50.",items:[
 {slot:"morning",type:"excursion",name:"Sea Aquarium"},
-{slot:"lunch",type:"resto",name:"Bonita Beach Club"},
+{slot:"lunch",type:"resto",name:"Loaf at Sea"},
 {slot:"afternoon",type:"beach",name:"Mambo Beach"},
-{slot:"evening",type:"resto",name:"Madero Ocean Club"}
-]},
-"d3":{summary:"Klein Curaçao day-trip with BlueFinn (departs from Mambo). All day. Easy dinner.",items:[
-{slot:"morning",type:"excursion",name:"BlueFinn Klein Curaçao"},
 {slot:"evening",type:"resto",name:"Pizza Mare Ristorante"}
 ]},
-"d4":{summary:"Westpunt day. Piskado turtles at 8:30, Knip by 10:30, Jaanchies for lunch. Sleep in the car home.",items:[
+"d3":{summary:"UTV adventure morning at Curacao Buggy Adventure — 9:30 AM slot, ~$425 for 2 vehicles, the biggest single spend besides anniversary. Easy beach + at-home dinner after.",items:[
+{slot:"morning",type:"excursion",name:"Curacao Buggy Adventure (UTV) — your pick"},
+{slot:"lunch",type:"resto",name:"Bonita Beach Club"},
+{slot:"afternoon",type:"beach",name:"Mambo Beach"},
+{slot:"evening",type:"resto",name:"at-home dinner (grocery)"}
+]},
+"d4":{summary:"Westpunt day — essentially free. Piskado turtles 8:30, Knip 10:30, packed lunch on the beach (save $$$ vs Jaanchies). Home for naps. Modest Mambo dinner ~$80.",items:[
 {slot:"morning",type:"beach",name:"Playa Grandi (Piskado)"},
 {slot:"morning",type:"beach",name:"Knip Beach (Grote Knip)"},
-{slot:"lunch",type:"resto",name:"Restaurant Jaanchies"},
-{slot:"evening",type:"resto",name:"Origami Sushi Bar"}
+{slot:"lunch",type:"resto",name:"Packed lunch from Vreugdenhil"},
+{slot:"evening",type:"resto",name:"El Grill & Mexicano"}
 ]},
-"d5":{summary:"⚓ Cruise day (Grandeur of the Seas). Stay close to home morning. Dolphin Academy afternoon when cruise crowd clears.",items:[
+"d5":{summary:"⚓ Cruise day. Stay local, swim Mambo morning, takeout lunch. Afternoon Sea Aquarium re-visit (free for hotel guests if free entry, else ~$30 partial visit). At-home dinner — save up for tomorrow.",items:[
 {slot:"morning",type:"beach",name:"Mambo Beach"},
-{slot:"afternoon",type:"excursion",name:"Dolphin Academy Encounter"},
-{slot:"evening",type:"resto",name:"Saint Tropez Ocean Club"}
+{slot:"lunch",type:"resto",name:"Loaf at Sea"},
+{slot:"afternoon",type:"beach",name:"Mambo Beach"},
+{slot:"evening",type:"resto",name:"at-home dinner (grocery)"}
 ]},
-"d6":{summary:"💕 Anniversary + ⚓ cruise. Family morning at Mambo, sitter from 4 PM, see Anniversary tab for evening route.",items:[
+"d6":{summary:"💕 Anniversary. Family day — no sitter. Mambo morning, kids screen-time afternoon. 5:30 PM drive to Pietermaai. Walk the colonial street as a family, brief sunset moment at the seawall (toast with the boys nearby), 7 PM dinner at Mar & Tierra 91. Budget cap $300-330 incl drinks.",items:[
 {slot:"morning",type:"beach",name:"Mambo Beach"},
 {slot:"lunch",type:"resto",name:"Bonita Beach Club"},
-{slot:"evening",type:"excursion",name:"Maxie Sailing private charter"},
-{slot:"evening",type:"resto",name:"Baoase Culinary Restaurant"}
+{slot:"afternoon",type:"resto",name:"Pietermaai sunset walk (family)"},
+{slot:"evening",type:"resto",name:"Mar & Tierra 91 (Pietermaai)"}
 ]},
-"d7":{summary:"Cas Abao morning + farm-to-table dinner at Hofi Cas Cora (book ahead — only open Thu-Sat).",items:[
+"d7":{summary:"Cas Abao morning — south coast's prettiest beach. ~$32 fee for family. Lunch at the beach restaurant or pack one. At-home dinner — your favorite spot is the apartment.",items:[
 {slot:"morning",type:"beach",name:"Playa Cas Abao"},
-{slot:"lunch",type:"resto",name:"Karakter Beach Lounge"},
-{slot:"evening",type:"resto",name:"Hofi Cas Cora"}
+{slot:"lunch",type:"resto",name:"Packed lunch or beach restaurant"},
+{slot:"afternoon",type:"beach",name:"Playa Cas Abao"},
+{slot:"evening",type:"resto",name:"at-home dinner (grocery)"}
 ]},
-"d8":{summary:"Christoffel summit before 10 AM, Shete Boka after. Punda evening + Gouverneur de Rouville sunset cocktails.",items:[
+"d8":{summary:"Last full day. Christoffel summit (kids may opt out — leave Ashton at hotel with sitter, take Kamran). Punda evening for the Floating Market + Plasa Bieu lunch. Dinner at BijBlauw or Pizza Mare farewell.",items:[
 {slot:"morning",type:"excursion",name:"Mt Christoffel hike (summit)"},
-{slot:"morning",type:"excursion",name:"Shete Boka National Park"},
-{slot:"lunch",type:"resto",name:"Restaurant Jaanchies"},
-{slot:"afternoon",type:"resto",name:"Gouverneur de Rouville"},
-{slot:"evening",type:"resto",name:"Kome"}
+{slot:"morning",type:"excursion",name:"Floating Market (Punda)"},
+{slot:"lunch",type:"resto",name:"Plasa Bieu (Old Market)"},
+{slot:"afternoon",type:"beach",name:"Mambo Beach"},
+{slot:"evening",type:"resto",name:"BIJ Blauw"}
 ]},
-"d9":{summary:"Departure. Last swim, pack, airport.",items:[
+"d9":{summary:"Departure. Last swim, pack, airport. ~$0 in spend besides fuel + tip return.",items:[
 {slot:"morning",type:"beach",name:"Mambo Beach"}
 ]}
 };
+
+const BUDGET={
+target:2500,
+hardCap:3000,
+breakdown:[
+{cat:"Already paid (sunk)",items:[
+{name:"Rental car (paid)",amount:0,note:"paid in advance"},
+{name:"Accommodation (paid)",amount:0,note:"paid in advance"}
+]},
+{cat:"Fixed costs (will spend regardless)",items:[
+{name:"Groceries — Vreugdenhil initial + restocks",amount:230,note:"breakfasts, snacks, drinks, 3-4 at-home dinners"},
+{name:"Fuel for rental car",amount:60,note:"8 days of driving incl. west-end and Christoffel"},
+{name:"Beach fees (Cas Abao $32 + Knip free + Christoffel $60)",amount:100,note:"park entries + parking"},
+{name:"Tap-water-safe — no bottled water expense",amount:0,note:"drink the tap (desalinated, safe)"}
+]},
+{cat:"Excursions",items:[
+{name:"UTV — Curacao Buggy Adventure (2 vehicles, 2.5hr)",amount:425,note:"estimate — confirm with operator"},
+{name:"Sea Aquarium walk-through (family of 4)",amount:84,note:"~$25 ad / $17 kid, walk from hotel"},
+{name:"NO Klein Curaçao boat",amount:0,note:"skipping — saves $420"},
+{name:"NO Dolphin Academy swim",amount:0,note:"skipping — Sea Aquarium covers wildlife"}
+]},
+{cat:"Food",items:[
+{name:"4 dinners out (avg $130 family)",amount:520,note:"Bonita, Pizza Mare, El Grill, BijBlauw"},
+{name:"4 at-home / takeout dinners (avg $50)",amount:200,note:"groceries, Donerix wraps, deli stuff"},
+{name:"Beach lunches — mostly packed",amount:80,note:"~$10/day, 2 days eat out at beach restaurants ($40 ea)"},
+{name:"Casual lunches out (2-3)",amount:90,note:"Loaf at Sea, Plasa Bieu, on-beach"},
+{name:"Coffee, snacks, ice cream",amount:80,note:"Salty Gelato, boulevard treats"}
+]},
+{cat:"Anniversary night (family, no sitter)",items:[
+{name:"Mar & Tierra 91 — family dinner of 4",amount:280,note:"cocktails + apps + mains; reservation already booked"},
+{name:"Pre-dinner Pietermaai sunset walk",amount:0,note:"free — walk the colonial street as a family"},
+{name:"Small toast moment (bring own bubbly)",amount:30,note:"Vreugdenhil sparkling wine + thermos to seawall"},
+{name:"Optional post-dinner Mundo Bizarro drink",amount:30,note:"if kids still up; one drink each"}
+]},
+{cat:"Buffer / extras",items:[
+{name:"Tips (10-15% restaurants)",amount:60,note:"some places auto-add service"},
+{name:"Small souvenirs / Curaçao liqueur",amount:60,note:"Chobolobo distillery shop"},
+{name:"Contingency (heat-day cocktails, kid stuff)",amount:80,note:"breathing room"}
+]}
+]
+};
+function calcBudget(){
+let total=0; let byCategory={};
+BUDGET.breakdown.forEach(c=>{
+let catTotal=0;
+c.items.forEach(it=>{ catTotal+=it.amount; total+=it.amount; });
+byCategory[c.cat]=catTotal;
+});
+return {total,byCategory};
+}
+
 </script>
 
 <script>
@@ -657,69 +715,57 @@ function buildSections(){
     <div id="suggested-plan" class="day-stack"></div>
   </section>
 
+  <section class="section" id="budget">
+    <h2 class="section-title">Trip <em>budget</em>.</h2>
+    <p class="section-sub">Target: <strong>$2,500</strong> on-the-ground spend (car + accommodation already paid). Hard cap: <strong>$3,000</strong>. This is what I think a smart, family-fun, no-regret version costs. Adjust items as you book — values below are estimates, not gospel.</p>
+    <div id="budget-summary"></div>
+    <div id="budget-breakdown"></div>
+    <div class="alert tip" style="margin-top:24px;"><strong>💡 Where the savings come from:</strong> Skipping Klein Curaçao saves ~$420. Skipping Dolphin swim experiences saves ~$180. Skipping Maxie Sailing saves ~$300-500. Eating in/takeout 4 of 8 nights saves ~$320 vs all-out. The remaining UTV + Fort Nassau anniversary fits cleanly under $2,500.</div>
+    <div class="alert bug" style="margin-top:16px;"><strong>⚠️ What I'm NOT confident about:</strong> UTV pricing is an <em>estimate</em> based on comparable operators — call Curacao Buggy Adventure directly to confirm 2 vehicles + Ashton-as-passenger before relying on the number. Restaurant prices vary widely with drinks; if you do 3 cocktails each at dinner the totals climb fast.</div>
+  </section>
+
   <section class="section" id="anniversary">
     <div class="anniv-hero">
       <h3>Anniversary <em>day</em>.<br/>Thursday, June 11.</h3>
-      <p>Two complete day arcs below. Both keep the kids happy until late afternoon, then carve out 6 PM onward as just the two of you — boys get fed at Mambo Boulevard (5 min away) with a sitter, and you get a real evening, not a dinner sandwiched between bedtime stories.</p>
+      <p>The "Mix" version — a beautiful family day with one real anniversary moment carved out. Reservation already booked at Mar &amp; Tierra 91 in Pietermaai. No sitter, no stress, the boys are part of the day. The romantic 20 minutes happen at the seawall at golden hour, not over a $400 dinner.</p>
     </div>
-    <div class="alert cruise"><strong>⚓ Heads up:</strong> Carnival Horizon (~3,974 cruise passengers) is in port Thu Jun 11, 8 AM – 5 PM. Punda will be packed all day — but ship leaves by 5 PM, so Punda Vibes evening (6 – 10 PM, fireworks 8:15 PM) clears out and locals dominate. Plan morning/afternoon outside Punda; evening in Punda is fine.</div>
-    <div class="key-fact rose"><strong>The framing:</strong> Don't try to make the whole day "anniversary." Spend morning + early afternoon as a family doing something memorable, then 6 PM onward is just for you two. Mambo Boulevard has 20+ kid-friendly options 5 min from the room — boys eat there with a sitter while you're out.</div>
+    <div class="alert cruise"><strong>⚓ Heads up:</strong> Carnival Horizon (~3,974 cruise passengers) is in port Thu Jun 11, 8 AM – 5 PM. Punda will be packed all day — but ship leaves by 5 PM. Pietermaai (next to Punda but quieter) is fine; by your 5:30 PM arrival the cruise day-trippers are gone and locals dominate.</div>
+    <div class="key-fact rose"><strong>The framing:</strong> Mix approach — your reservation at Mar &amp; Tierra is the centerpiece. The "just us" moment is a 15-20 min sunset pause at the Pietermaai seawall before dinner. Boys are nearby exploring street art and the colonial buildings. You get the toast, the photo, the moment — without leaving the kids behind.</div>
 
     <div class="anniv-route">
-      <span class="route-label">Route A · Adventure together</span>
-      <h4>Maxie Sailing private charter + Baoase dinner</h4>
-      <p class="route-tag">The "all-in" version. Big-ticket evening. ~$960–1,200 total.</p>
+      <span class="route-label">The Day · Mix approach</span>
+      <h4>Family day + Pietermaai sunset moment + Mar &amp; Tierra 91</h4>
+      <p class="route-tag">Budget cap ~$310. Reservation already booked.</p>
       <div class="timeline">
-        <div class="timeline-item"><span class="t-time">9:00 AM</span><span class="t-text"><strong>Slow family breakfast at home</strong></span><div class="t-detail">Coffee, eggs, fruit. No alarms. Cruise ship is in port — keep it local.</div></div>
-        <div class="timeline-item"><span class="t-time">10:30 AM</span><span class="t-text"><strong>Mambo Beach morning</strong></span><div class="t-detail">Boys swim, you both lounge. Order light lunch from Bonita or Pizza Mare ~12:30.</div></div>
-        <div class="timeline-item"><span class="t-time">2:30 PM</span><span class="t-text"><strong>Quiet hour — kids screen time</strong></span><div class="t-detail">You two pack for evening, confirm sitter.</div></div>
-        <div class="timeline-item peak"><span class="t-time">4:00 PM</span><span class="t-text"><strong>Sitter arrives · drive to Maxie Sailing</strong></span><div class="t-detail">Norbert & Hilde's private 48-ft yacht <em>Galaxie</em>. Just the two of you. Welcome champagne, sunset cruise. Travelers' Choice winner. Pickup typically Caracasbaai marina.</div></div>
-        <div class="timeline-item peak"><span class="t-time">6:48 PM</span><span class="t-text"><strong>Sunset on the water</strong></span><div class="t-detail">The whole reason for this evening.</div></div>
-        <div class="timeline-item"><span class="t-time">7:30 PM</span><span class="t-text"><strong>Back to dock · drive to Baoase</strong></span><div class="t-detail">~10 min from marina to Baoase Resort.</div></div>
-        <div class="timeline-item peak"><span class="t-time">8:00 PM</span><span class="t-text"><strong>Baoase — private candlelit gazebo</strong></span><div class="t-detail">Pre-book the private gazebo dining (separate from main restaurant). French technique, tropical/Asian flavors, beachfront.</div></div>
-        <div class="timeline-item"><span class="t-time">10:30 PM</span><span class="t-text"><strong>Slow drive home · check in on boys</strong></span><div class="t-detail">~15 min back to Mambo. Sitter has them asleep.</div></div>
+        <div class="timeline-item"><span class="t-time">9:00 AM</span><span class="t-text"><strong>Slow family breakfast at home</strong></span><div class="t-detail">No alarm. Coffee on the balcony. This is the start of the anniversary feel — you have the morning together without a plan.</div></div>
+        <div class="timeline-item"><span class="t-time">10:30 AM</span><span class="t-text"><strong>Mambo Beach as a family</strong></span><div class="t-detail">Boys swim, you both lounge with books. Cruise crowd doesn't really hit Mambo proper. Order a light lunch from Bonita ~12:30.</div></div>
+        <div class="timeline-item"><span class="t-time">2:30 PM</span><span class="t-text"><strong>Quiet hour</strong></span><div class="t-detail">Heat peak. Kids on screens, you both rest. Maybe grab a coffee from Loaf at Sea.</div></div>
+        <div class="timeline-item"><span class="t-time">4:30 PM</span><span class="t-text"><strong>Shower, dress up just a little</strong></span><div class="t-detail">Kids in clean clothes. You + Kristen in nicer-than-beach outfits. Tuck a small bottle of sparkling in a cool bag with two plastic cups.</div></div>
+        <div class="timeline-item peak"><span class="t-time">5:30 PM</span><span class="t-text"><strong>Drive to Pietermaai</strong></span><div class="t-detail">~10 min from Mambo. Park near Mar &amp; Tierra at #91. Cruise day-trippers are gone by now.</div></div>
+        <div class="timeline-item"><span class="t-time">5:45 PM</span><span class="t-text"><strong>Pietermaai walk as a family</strong></span><div class="t-detail">The restored colonial street is one of the best photo spots on the island in golden hour. Murals, street art, the painted facades. Boys explore, you take family photos.</div></div>
+        <div class="timeline-item peak"><span class="t-time">6:30 PM</span><span class="t-text"><strong>Sunset moment at the Pietermaai seawall</strong></span><div class="t-detail">Walk to the seawall at the end of the district. Boys play nearby. You two pop the small bottle, toast, take 15 minutes. Watch the sun drop into the Caribbean (~6:48 PM). This is the photograph you'll keep.</div></div>
+        <div class="timeline-item peak"><span class="t-time">7:00 PM</span><span class="t-text"><strong>Mar &amp; Tierra 91 — reservation</strong></span><div class="t-detail">Reviews call out Sebastian, Yohana, Adriana, and Alex at the bar by name. Order the octopus carpaccio to share, premium steak cut for someone, ceviche, mocktails for the boys, real cocktails for you. ~$280 for 4 with drinks.</div></div>
+        <div class="timeline-item"><span class="t-time">9:00 PM</span><span class="t-text"><strong>Slow walk back to the car · optional Mundo Bizarro</strong></span><div class="t-detail">If the boys are still awake and the night has energy, stop at Mundo Bizarro for one drink — live music Thu nights. If they're fading, head home. ~10 min to Mambo, kids asleep in the back.</div></div>
       </div>
       <div class="briefing-pack">
-        <strong>Pre-book 3–4 weeks out</strong>
-        • Maxie Sailing private charter (sunset) — <a href="https://www.maxiesailing.com/" target="_blank" rel="noopener">maxiesailing.com</a><br/>
-        • Baoase private gazebo dinner — <a href="https://baoase.com/romance/romantic-offerings/romantic-dining/" target="_blank" rel="noopener">baoase.com/romance</a> · email reservations@baoase.com<br/>
-        • Sitter via hotel concierge or local agency
+        <strong>What you bring</strong>
+        • Small bottle of sparkling wine or champagne from Vreugdenhil ($15-25) + 2 plastic cups<br/>
+        • Cool bag with a single ice pack to keep it cold for the seawall<br/>
+        • Phone fully charged for the seawall photo<br/>
+        • Light cover-up — Mar &amp; Tierra is chic, not stuffy, but elevate the look slightly<br/>
+        • Reservation confirmation on phone
       </div>
     </div>
 
     <div class="anniv-route">
-      <span class="route-label">Route B · Family day + Sunset dinner</span>
-      <h4>West-end family adventure + Fort Nassau sunset dinner</h4>
-      <p class="route-tag">The "perfect day, perfect night." ~$580-680 for the evening.</p>
-      <div class="alert tip" style="margin-bottom: 12px;"><strong>Tip:</strong> Going west on Thu Jun 11 is risky — cruise excursions skew toward Knip + Cas Abao that day. But if you go EARLY (Piskado 8 AM, Knip 9:30 AM) you'll be ahead of the cruise buses which typically arrive 10:30+.</div>
-      <div class="timeline">
-        <div class="timeline-item peak"><span class="t-time">7:00 AM</span><span class="t-text"><strong>Drive west as a family</strong></span><div class="t-detail">~1 hr to Westpunt.</div></div>
-        <div class="timeline-item"><span class="t-time">8:30 AM</span><span class="t-text"><strong>Playa Piskado — turtles!</strong></span><div class="t-detail">Snorkel with green sea turtles. Magical kid moment.</div></div>
-        <div class="timeline-item"><span class="t-time">10:30 AM</span><span class="t-text"><strong>Knip Beach — postcard turquoise</strong></span><div class="t-detail">Family photo here. Get there before cruise buses (~11 AM).</div></div>
-        <div class="timeline-item"><span class="t-time">12:30 PM</span><span class="t-text"><strong>Lunch at Restaurant Jaanchies</strong></span><div class="t-detail">Iconic Westpunt spot.</div></div>
-        <div class="timeline-item"><span class="t-time">2:00 PM</span><span class="t-text"><strong>Drive home · everyone naps</strong></span><div class="t-detail">~1 hr drive.</div></div>
-        <div class="timeline-item peak"><span class="t-time">5:30 PM</span><span class="t-text"><strong>Sitter arrives · you two leave</strong></span><div class="t-detail">Cruise ship has just departed Punda.</div></div>
-        <div class="timeline-item peak"><span class="t-time">6:00 PM</span><span class="t-text"><strong>Sunset cocktails — Gouverneur de Rouville</strong></span><div class="t-detail">Best Punda-skyline view in Willemstad.</div></div>
-        <div class="timeline-item peak"><span class="t-time">7:30 PM</span><span class="t-text"><strong>Dinner at Restaurant Fort Nassau</strong></span><div class="t-detail">18th-century hilltop fortress with 360° view.</div></div>
-        <div class="timeline-item"><span class="t-time">10:00 PM</span><span class="t-text"><strong>Optional: drink at Mundo Bizarro</strong></span><div class="t-detail">Pietermaai. Live music typically Thu.</div></div>
-      </div>
-      <div class="briefing-pack">
-        <strong>Pre-book 2–3 weeks out</strong>
-        • Fort Nassau sunset reservations — <a href="https://www.fortnassau.com/" target="_blank" rel="noopener">fortnassau.com</a> (sells out)<br/>
-        • Gouverneur de Rouville sunset cocktails — <a href="https://www.de-gouverneur.com/" target="_blank" rel="noopener">de-gouverneur.com</a><br/>
-        • Sitter for 5:00 PM – 11:00 PM
-      </div>
-    </div>
-
-    <div class="anniv-route">
-      <span class="route-label">Bonus · Add-ons</span>
-      <h4>Make it more</h4>
-      <p class="route-tag">Optional touches that scale up either route.</p>
+      <span class="route-label">Bonus · Small touches</span>
+      <h4>Make the day feel more</h4>
+      <p class="route-tag">Free or near-free moments that add up.</p>
       <div class="overview-grid" style="margin: 0;">
-        <div class="ocard"><h3>💆 Couples spa</h3><ul><li>Spa at LionsDive<span class="v">5 min walk</span></li><li>Baoase spa<span class="v">at the resort</span></li><li>Best time<span class="v">2-4 PM same day</span></li></ul></div>
-        <div class="ocard"><h3>🌅 Sunrise SUP</h3><ul><li>SUP Spanish Water<span class="v">6:00 AM start</span></li><li>Sunrise on water<span class="v">just the two of you</span></li><li>Back by 8<span class="v">kids barely up</span></li></ul></div>
-        <div class="ocard"><h3>🌹 At-home setup</h3><ul><li>Petals/candles<span class="v">via concierge</span></li><li>Champagne<span class="v">Vreugdenhil sells Veuve</span></li><li>Florist<span class="v">Floricultura Curaçao</span></li></ul></div>
-        <div class="ocard"><h3>📸 Pro photographer</h3><ul><li>Sunset shoot<span class="v">~$250-400 / 1 hr</span></li><li>Knip or Mambo<span class="v">postcard backdrop</span></li><li>Search<span class="v">"Curacao photographer"</span></li></ul></div>
+        <div class="ocard"><h3>☕ Morning ritual</h3><ul><li>Coffee on the balcony<span class="v">together, before boys wake</span></li><li>Set out before 7 AM<span class="v">light is best then</span></li><li>The unhurried hour<span class="v">is the actual gift</span></li></ul></div>
+        <div class="ocard"><h3>🌹 Room setup</h3><ul><li>Stop at florist before<span class="v">Floricultura Curaçao</span></li><li>Small flowers + note<span class="v">on the dresser</span></li><li>~$20<span class="v">she will notice</span></li></ul></div>
+        <div class="ocard"><h3>📸 The seawall shot</h3><ul><li>Ask a stranger<span class="v">to take 2-3 photos</span></li><li>Both of you with bubbly<span class="v">sun behind</span></li><li>Free<span class="v">priceless</span></li></ul></div>
+        <div class="ocard"><h3>🍰 Cake/dessert</h3><ul><li>Pre-arrange at Mar &amp; Tierra<span class="v">call when confirming</span></li><li>Most restaurants oblige<span class="v">small surcharge or free</span></li><li>"Happy anniversary"<span class="v">on the plate</span></li></ul></div>
       </div>
     </div>
   </section>
@@ -1084,6 +1130,57 @@ function renderSuggestedPlan(){
 }
 
 /* ====== BRIEFING ====== */
+function renderBudget(){
+  const summ=document.getElementById('budget-summary');
+  const bd=document.getElementById('budget-breakdown');
+  if(!summ||!bd) return;
+  const calc=calcBudget();
+  const total=calc.total;
+  const overTarget=total>BUDGET.target;
+  const overCap=total>BUDGET.hardCap;
+  const cushion=BUDGET.target-total;
+  const headColor=overCap?'var(--coral)':(overTarget?'var(--warn)':'var(--green)');
+  const cushionText=cushion>=0?`$${cushion.toLocaleString()} under target`:`$${Math.abs(cushion).toLocaleString()} over target`;
+  summ.innerHTML=`
+    <div style="background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:24px;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:baseline;justify-content:space-between;margin-bottom:8px;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-2);opacity:0.7;margin-bottom:4px;">Estimated total</div>
+          <div style="font-family:'Fraunces',serif;font-size:56px;font-weight:300;line-height:1;color:${headColor};">$${total.toLocaleString()}</div>
+          <div style="font-size:13.5px;color:${cushion>=0?'var(--green)':'var(--coral)'};margin-top:6px;font-weight:600;">${cushionText}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-2);opacity:0.7;margin-bottom:4px;">Target · Hard cap</div>
+          <div style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;line-height:1.2;">$${BUDGET.target.toLocaleString()} <span style="opacity:0.5;font-size:18px;">· $${BUDGET.hardCap.toLocaleString()}</span></div>
+        </div>
+      </div>
+      <div style="background:var(--sand);height:10px;border-radius:5px;overflow:hidden;margin-top:14px;">
+        <div style="width:${Math.min(100,(total/BUDGET.hardCap)*100)}%;height:100%;background:linear-gradient(90deg,var(--green),var(--sun),var(--coral));"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10.5px;font-family:'JetBrains Mono',monospace;color:var(--ink-2);margin-top:6px;opacity:0.7;">
+        <span>$0</span><span>$${BUDGET.target.toLocaleString()} target</span><span>$${BUDGET.hardCap.toLocaleString()} cap</span>
+      </div>
+    </div>`;
+  bd.innerHTML=BUDGET.breakdown.map(cat=>{
+    const catTotal=cat.items.reduce((s,i)=>s+i.amount,0);
+    const itemRows=cat.items.map(it=>`
+      <div style="display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);align-items:baseline;">
+        <div>
+          <div style="font-size:13.5px;font-weight:500;">${it.name}</div>
+          ${it.note?`<div style="font-size:11.5px;color:var(--ink-2);opacity:0.75;margin-top:2px;">${it.note}</div>`:''}
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;color:${it.amount===0?'var(--green)':'var(--ink)'};">${it.amount===0?'$0':'$'+it.amount}</div>
+      </div>`).join('');
+    return `
+    <div style="background:white;border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:14px;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line);">
+        <h4 style="font-family:'Fraunces',serif;font-size:20px;font-weight:500;">${cat.cat}</h4>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:${catTotal===0?'var(--green)':'var(--sea-deep)'};">${catTotal===0?'$0 (paid)':'$'+catTotal.toLocaleString()}</div>
+      </div>
+      ${itemRows}
+    </div>`;
+  }).join('');
+}
 function renderBriefing(){
   const c=document.getElementById('briefing-container');
   if(!c) return;
@@ -1346,6 +1443,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderRestaurants();
   renderExcursions();
   renderSuggestedPlan();
+  renderBudget();
   renderBriefing();
   renderChecklist();
   renderItinerary();
